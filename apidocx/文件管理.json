@@ -1,0 +1,1045 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "默认模块",
+    "description": "",
+    "version": "1.0.0"
+  },
+  "tags": [],
+  "paths": {
+    "/api/file/upload": {
+      "post": {
+        "summary": "文件上传",
+        "deprecated": false,
+        "description": "文件上传\n文件上传\n上传文件到MinIO存储",
+        "tags": [],
+        "parameters": [
+          {
+            "name": "category",
+            "in": "query",
+            "description": "文件分类目录（可选） 文件分类目录，如：avatar、document",
+            "required": false,
+            "example": "common",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "",
+            "example": "Bearer {{a}}",
+            "schema": {
+              "type": "string",
+              "default": "Bearer {{a}}"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "file": {
+                    "description": "上传的文件 上传的文件",
+                    "example": "cmMtdXBsb2FkLTE3NTg5NTkwODAzNjUtNQ==/2.jpg",
+                    "type": "string",
+                    "format": "binary"
+                  }
+                },
+                "required": [
+                  "file"
+                ]
+              },
+              "examples": {}
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultMapObject",
+                  "description": "文件访问信息"
+                },
+                "example": {
+                  "code": 200,
+                  "message": "文件上传成功",
+                  "data": {
+                    "fileName": "",
+                    "originalName": "",
+                    "relativePath": "",
+                    "objectName": "",
+                    "fileSize": 0,
+                    "contentType": "",
+                    "uploadTime": {
+                      "date": {
+                        "year": 2025,
+                        "month": 9,
+                        "day": 27
+                      },
+                      "time": {
+                        "hour": 16,
+                        "minute": 20,
+                        "second": 8,
+                        "nano": 674892400
+                      }
+                    }
+                  },
+                  "timestamp": 1758961208739,
+                  "success": false
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": []
+      }
+    },
+    "/api/file/info": {
+      "get": {
+        "summary": "获取文件信息",
+        "deprecated": false,
+        "description": "获取文件信息\n获取文件信息\n根据对象名称获取文件信息",
+        "tags": [],
+        "parameters": [
+          {
+            "name": "objectName",
+            "in": "query",
+            "description": "对象名称（文件路径） 对象名称（文件路径）",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "",
+            "example": "Bearer {{a}}",
+            "schema": {
+              "type": "string",
+              "default": "Bearer {{a}}"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultMapObject",
+                  "description": "文件信息"
+                },
+                "example": {
+                  "code": 200,
+                  "message": "获取文件信息成功",
+                  "data": {
+                    "relativePath": "",
+                    "objectName": "",
+                    "fileSize": 0,
+                    "contentType": "",
+                    "lastModified": {
+                      "dateTime": "",
+                      "offset": {
+                        "totalSeconds": 0
+                      },
+                      "zone": {
+                        "id": "",
+                        "rules": {
+                          "standardTransitions": [
+                            0
+                          ],
+                          "standardOffsets": [
+                            {
+                              "totalSeconds": 0
+                            }
+                          ],
+                          "savingsInstantTransitions": [
+                            0
+                          ],
+                          "savingsLocalTransitions": [
+                            ""
+                          ],
+                          "wallOffsets": [
+                            {
+                              "totalSeconds": 0
+                            }
+                          ],
+                          "lastRules": [
+                            {
+                              "month": "",
+                              "dom": 0,
+                              "dow": "",
+                              "time": "",
+                              "timeEndOfDay": false,
+                              "timeDefinition": "",
+                              "standardOffset": {
+                                "totalSeconds": 0
+                              },
+                              "offsetBefore": {
+                                "totalSeconds": 0
+                              },
+                              "offsetAfter": {
+                                "totalSeconds": 0
+                              },
+                              "dayOfMonthIndicator": 0,
+                              "dayOfWeek": "",
+                              "localTime": "",
+                              "midnightEndOfDay": false
+                            }
+                          ],
+                          "fixedOffset": false,
+                          "transitions": [
+                            {
+                              "epochSecond": 0,
+                              "transition": "",
+                              "offsetBefore": {
+                                "totalSeconds": 0
+                              },
+                              "offsetAfter": {
+                                "totalSeconds": 0
+                              },
+                              "instant": {
+                                "seconds": 0,
+                                "nanos": 0,
+                                "epochSecond": 0,
+                                "nano": 0
+                              },
+                              "dateTimeBefore": "",
+                              "dateTimeAfter": "",
+                              "duration": {
+                                "seconds": 0,
+                                "nanos": 0,
+                                "units": [
+                                  {
+                                    "duration": {
+                                      "seconds": 0,
+                                      "nanos": 0,
+                                      "units": [
+                                        {
+                                          "duration": {},
+                                          "durationEstimated": false,
+                                          "dateBased": false,
+                                          "timeBased": false
+                                        }
+                                      ],
+                                      "positive": false,
+                                      "zero": false,
+                                      "negative": false,
+                                      "nano": 0
+                                    },
+                                    "durationEstimated": false,
+                                    "dateBased": false,
+                                    "timeBased": false
+                                  }
+                                ],
+                                "positive": false,
+                                "zero": false,
+                                "negative": false,
+                                "nano": 0
+                              },
+                              "gap": false,
+                              "overlap": false
+                            }
+                          ],
+                          "transitionRules": [
+                            {
+                              "month": "",
+                              "dom": 0,
+                              "dow": "",
+                              "time": "",
+                              "timeEndOfDay": false,
+                              "timeDefinition": "",
+                              "standardOffset": {
+                                "totalSeconds": 0
+                              },
+                              "offsetBefore": {
+                                "totalSeconds": 0
+                              },
+                              "offsetAfter": {
+                                "totalSeconds": 0
+                              },
+                              "dayOfMonthIndicator": 0,
+                              "dayOfWeek": "",
+                              "localTime": "",
+                              "midnightEndOfDay": false
+                            }
+                          ]
+                        }
+                      },
+                      "chronology": {
+                        "id": "",
+                        "calendarType": "",
+                        "isoBased": false
+                      },
+                      "year": 0,
+                      "monthValue": 0,
+                      "month": "",
+                      "dayOfMonth": 0,
+                      "dayOfYear": 0,
+                      "dayOfWeek": "",
+                      "hour": 0,
+                      "minute": 0,
+                      "second": 0,
+                      "nano": 0
+                    },
+                    "etag": ""
+                  },
+                  "timestamp": 1758961209582,
+                  "success": false
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": []
+      }
+    },
+    "/api/file/proxy/common/20250927_162124_c41ca2b2cbff44b3a929a472e9ef6848.jpg": {
+      "get": {
+        "summary": "文件代理访问",
+        "deprecated": false,
+        "description": "文件代理访问（通过相对路径获取文件）\n文件代理访问\n通过相对路径获取文件，用于前端显示",
+        "tags": [],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "",
+            "example": "Bearer {{a}}",
+            "schema": {
+              "type": "string",
+              "default": "Bearer {{a}}"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "integer"
+                  },
+                  "description": "文件流"
+                },
+                "example": [
+                  0
+                ]
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": []
+      }
+    },
+    "/api/file/download": {
+      "get": {
+        "summary": "文件下载",
+        "deprecated": false,
+        "description": "文件下载\n文件下载\n根据相对路径下载文件",
+        "tags": [],
+        "parameters": [
+          {
+            "name": "relativePath",
+            "in": "query",
+            "description": "相对路径 相对路径",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "",
+            "example": "Bearer {{a}}",
+            "schema": {
+              "type": "string",
+              "default": "Bearer {{a}}"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "integer"
+                  },
+                  "description": "文件流"
+                },
+                "example": [
+                  0
+                ]
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": []
+      }
+    },
+    "/api/file": {
+      "delete": {
+        "summary": "删除文件",
+        "deprecated": false,
+        "description": "删除文件\n删除文件\n根据相对路径删除文件",
+        "tags": [],
+        "parameters": [
+          {
+            "name": "relativePath",
+            "in": "query",
+            "description": "相对路径 相对路径",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "",
+            "example": "Bearer {{a}}",
+            "schema": {
+              "type": "string",
+              "default": "Bearer {{a}}"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultString",
+                  "description": "删除结果"
+                },
+                "example": {
+                  "code": 0,
+                  "message": "",
+                  "data": "",
+                  "timestamp": 0
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": []
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "ResultMapObject": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "integer",
+            "description": "响应状态码"
+          },
+          "message": {
+            "type": "string",
+            "description": "响应消息"
+          },
+          "data": {
+            "type": "object",
+            "properties": {
+              "relativePath": {
+                "type": "string"
+              },
+              "objectName": {
+                "type": "string"
+              },
+              "fileSize": {
+                "type": "integer"
+              },
+              "contentType": {
+                "type": "string"
+              },
+              "lastModified": {
+                "$ref": "#/components/schemas/lastModified"
+              },
+              "etag": {
+                "type": "string"
+              }
+            },
+            "description": "响应数据"
+          },
+          "timestamp": {
+            "type": "integer",
+            "description": "时间戳",
+            "format": "int64"
+          },
+          "success": {
+            "type": "boolean"
+          }
+        }
+      },
+      "ZoneOffset": {
+        "type": "object",
+        "properties": {
+          "totalSeconds": {
+            "type": "integer",
+            "description": "The total offset in seconds."
+          }
+        }
+      },
+      "ZoneOffset1": {
+        "type": "object",
+        "properties": {
+          "totalSeconds": {
+            "type": "integer",
+            "description": "The total offset in seconds."
+          }
+        }
+      },
+      "ZoneOffsetTransitionRule": {
+        "type": "object",
+        "properties": {
+          "month": {
+            "type": "string",
+            "description": "The month of the month-day of the first day of the cutover week.\nThe actual date will be adjusted by the dowChange field.",
+            "enum": [
+              "JANUARY",
+              "FEBRUARY",
+              "MARCH",
+              "APRIL",
+              "MAY",
+              "JUNE",
+              "JULY",
+              "AUGUST",
+              "SEPTEMBER",
+              "OCTOBER",
+              "NOVEMBER",
+              "DECEMBER"
+            ]
+          },
+          "dom": {
+            "type": "integer",
+            "description": "The day-of-month of the month-day of the cutover week.\nIf positive, it is the start of the week where the cutover can occur.\nIf negative, it represents the end of the week where cutover can occur.\nThe value is the number of days from the end of the month, such that\n{@code -1} is the last day of the month,{@code -2} is the second\nto last day, and so on.",
+            "minimum": -127,
+            "maximum": 128
+          },
+          "dow": {
+            "type": "string",
+            "description": "The cutover day-of-week, null to retain the day-of-month.",
+            "enum": [
+              "MONDAY",
+              "TUESDAY",
+              "WEDNESDAY",
+              "THURSDAY",
+              "FRIDAY",
+              "SATURDAY",
+              "SUNDAY"
+            ]
+          },
+          "time": {
+            "type": "string",
+            "description": "The cutover time in the 'before' offset."
+          },
+          "timeEndOfDay": {
+            "type": "boolean",
+            "description": "Whether the cutover time is midnight at the end of day."
+          },
+          "timeDefinition": {
+            "type": "string",
+            "description": "The definition of how the local time should be interpreted.",
+            "enum": [
+              "UTC",
+              "WALL",
+              "STANDARD"
+            ]
+          },
+          "standardOffset": {
+            "$ref": "#/components/schemas/ZoneOffset",
+            "description": "The standard offset at the cutover."
+          },
+          "offsetBefore": {
+            "$ref": "#/components/schemas/ZoneOffset",
+            "description": "The offset before the cutover."
+          },
+          "offsetAfter": {
+            "$ref": "#/components/schemas/ZoneOffset",
+            "description": "The offset after the cutover."
+          },
+          "dayOfMonthIndicator": {
+            "type": "integer",
+            "description": "Gets the indicator of the day-of-month of the transition.\n<p>\nIf the rule defines an exact date then the day is the month of that date.\n<p>\nIf the rule defines a week where the transition might occur, then the day\ndefines either the start of the end of the transition week.\n<p>\nIf the value is positive, then it represents a normal day-of-month, and is the\nearliest possible date that the transition can be.\nThe date may refer to 29th February which should be treated as 1st March in non-leap years.\n<p>\nIf the value is negative, then it represents the number of days back from the\nend of the month where{@code -1} is the last day of the month.\nIn this case, the day identified is the latest possible date that the transition can be."
+          },
+          "dayOfWeek": {
+            "type": "string",
+            "description": "Gets the day-of-week of the transition.\n<p>\nIf the rule defines an exact date then this returns null.\n<p>\nIf the rule defines a week where the cutover might occur, then this method\nreturns the day-of-week that the month-day will be adjusted to.\nIf the day is positive then the adjustment is later.\nIf the day is negative then the adjustment is earlier.",
+            "enum": [
+              "MONDAY",
+              "TUESDAY",
+              "WEDNESDAY",
+              "THURSDAY",
+              "FRIDAY",
+              "SATURDAY",
+              "SUNDAY"
+            ]
+          },
+          "localTime": {
+            "type": "string",
+            "description": "Gets the local time of day of the transition which must be checked with\n{@link #isMidnightEndOfDay()}.\n<p>\nThe time is converted into an instant using the time definition."
+          },
+          "midnightEndOfDay": {
+            "type": "boolean",
+            "description": "Is the transition local time midnight at the end of day.\n<p>\nThe transition may be represented as occurring at 24:00."
+          }
+        }
+      },
+      "Instant": {
+        "type": "object",
+        "properties": {
+          "seconds": {
+            "type": "integer",
+            "description": "The number of seconds from the epoch of 1970-01-01T00:00:00Z.",
+            "format": "int64"
+          },
+          "nanos": {
+            "type": "integer",
+            "description": "The number of nanoseconds, later along the time-line, from the seconds field.\nThis is always positive, and never exceeds 999,999,999."
+          },
+          "epochSecond": {
+            "type": "integer",
+            "description": "Gets the number of seconds from the Java epoch of 1970-01-01T00:00:00Z.\n<p>\nThe epoch second count is a simple incrementing count of seconds where\nsecond 0 is 1970-01-01T00:00:00Z.\nThe nanosecond part is returned by{@link #getNano}.",
+            "format": "int64"
+          },
+          "nano": {
+            "type": "integer",
+            "description": "Gets the number of nanoseconds, later along the time-line, from the start\nof the second.\n<p>\nThe nanosecond-of-second value measures the total number of nanoseconds from\nthe second returned by{@link #getEpochSecond}."
+          }
+        }
+      },
+      "Duration": {
+        "type": "object",
+        "properties": {
+          "seconds": {
+            "type": "integer",
+            "description": "The number of seconds in the duration.",
+            "format": "int64"
+          },
+          "nanos": {
+            "type": "integer",
+            "description": "The number of nanoseconds in the duration, expressed as a fraction of the\nnumber of seconds. This is always positive, and never exceeds 999,999,999."
+          },
+          "units": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/TemporalUnit",
+              "description": "java.time.temporal.TemporalUnit"
+            },
+            "description": "Gets the set of units supported by this duration.\n<p>\nThe supported units are{@link ChronoUnit#SECONDS SECONDS},\nand{@link ChronoUnit#NANOS NANOS}.\nThey are returned in the order seconds, nanos.\n<p>\nThis set can be used in conjunction with{@link #get(TemporalUnit)}\nto access the entire state of the duration."
+          },
+          "positive": {
+            "type": "boolean",
+            "description": "Checks if this duration is positive, excluding zero.\n<p>\nA{@code Duration} represents a directed distance between two points on\nthe time-line and can therefore be positive, zero or negative.\nThis method checks whether the length is greater than zero."
+          },
+          "zero": {
+            "type": "boolean",
+            "description": "Checks if this duration is zero length.\n<p>\nA{@code Duration} represents a directed distance between two points on\nthe time-line and can therefore be positive, zero or negative.\nThis method checks whether the length is zero."
+          },
+          "negative": {
+            "type": "boolean",
+            "description": "Checks if this duration is negative, excluding zero.\n<p>\nA{@code Duration} represents a directed distance between two points on\nthe time-line and can therefore be positive, zero or negative.\nThis method checks whether the length is less than zero."
+          },
+          "nano": {
+            "type": "integer",
+            "description": "Gets the number of nanoseconds within the second in this duration.\n<p>\nThe length of the duration is stored using two fields - seconds and nanoseconds.\nThe nanoseconds part is a value from 0 to 999,999,999 that is an adjustment to\nthe length in seconds.\nThe total duration is defined by calling this method and{@link #getSeconds()}.\n<p>\nA{@code Duration} represents a directed distance between two points on the time-line.\nA negative duration is expressed by the negative sign of the seconds part.\nA duration of -1 nanosecond is stored as -1 seconds plus 999,999,999 nanoseconds."
+          }
+        }
+      },
+      "TemporalUnit": {
+        "type": "object",
+        "properties": {
+          "duration": {
+            "$ref": "#/components/schemas/Duration",
+            "description": "Gets the duration of this unit, which may be an estimate.\n<p>\nAll units return a duration measured in standard nanoseconds from this method.\nThe duration will be positive and non-zero.\nFor example, an hour has a duration of{@code 60 * 60 * 1,000,000,000ns}.\n<p>\nSome units may return an accurate duration while others return an estimate.\nFor example, days have an estimated duration due to the possibility of\ndaylight saving time changes.\nTo determine if the duration is an estimate, use{@link #isDurationEstimated()}."
+          },
+          "durationEstimated": {
+            "type": "boolean",
+            "description": "Checks if the duration of the unit is an estimate.\n<p>\nAll units have a duration, however the duration is not always accurate.\nFor example, days have an estimated duration due to the possibility of\ndaylight saving time changes.\nThis method returns true if the duration is an estimate and false if it is\naccurate. Note that accurate/estimated ignores leap seconds."
+          },
+          "dateBased": {
+            "type": "boolean",
+            "description": "Checks if this unit represents a component of a date.\n<p>\nA date is time-based if it can be used to imply meaning from a date.\nIt must have a{@linkplain #getDuration() duration} that is an integral\nmultiple of the length of a standard day.\nNote that it is valid for both{@code isDateBased()} and{@code isTimeBased()}\nto return false, such as when representing a unit like 36 hours."
+          },
+          "timeBased": {
+            "type": "boolean",
+            "description": "Checks if this unit represents a component of a time.\n<p>\nA unit is time-based if it can be used to imply meaning from a time.\nIt must have a{@linkplain #getDuration() duration} that divides into\nthe length of a standard day without remainder.\nNote that it is valid for both{@code isDateBased()} and{@code isTimeBased()}\nto return false, such as when representing a unit like 36 hours."
+          }
+        }
+      },
+      "ZoneOffsetTransition": {
+        "type": "object",
+        "properties": {
+          "epochSecond": {
+            "type": "integer",
+            "description": "The transition epoch-second.",
+            "format": "int64"
+          },
+          "transition": {
+            "type": "string",
+            "description": "The local transition date-time at the transition."
+          },
+          "offsetBefore": {
+            "$ref": "#/components/schemas/ZoneOffset",
+            "description": "The offset before transition."
+          },
+          "offsetAfter": {
+            "$ref": "#/components/schemas/ZoneOffset",
+            "description": "The offset after transition."
+          },
+          "instant": {
+            "$ref": "#/components/schemas/Instant",
+            "description": "Gets the transition instant.\n<p>\nThis is the instant of the discontinuity, which is defined as the first\ninstant that the 'after' offset applies.\n<p>\nThe methods{@link #getInstant()},{@link #getDateTimeBefore()} and{@link #getDateTimeAfter()}\nall represent the same instant."
+          },
+          "dateTimeBefore": {
+            "type": "string",
+            "description": "Gets the local transition date-time, as would be expressed with the 'before' offset.\n<p>\nThis is the date-time where the discontinuity begins expressed with the 'before' offset.\nAt this instant, the 'after' offset is actually used, therefore the combination of this\ndate-time and the 'before' offset will never occur.\n<p>\nThe combination of the 'before' date-time and offset represents the same instant\nas the 'after' date-time and offset."
+          },
+          "dateTimeAfter": {
+            "type": "string",
+            "description": "Gets the local transition date-time, as would be expressed with the 'after' offset.\n<p>\nThis is the first date-time after the discontinuity, when the new offset applies.\n<p>\nThe combination of the 'before' date-time and offset represents the same instant\nas the 'after' date-time and offset."
+          },
+          "duration": {
+            "$ref": "#/components/schemas/Duration",
+            "description": "Gets the duration of the transition.\n<p>\nIn most cases, the transition duration is one hour, however this is not always the case.\nThe duration will be positive for a gap and negative for an overlap.\nTime-zones are second-based, so the nanosecond part of the duration will be zero."
+          },
+          "gap": {
+            "type": "boolean",
+            "description": "Does this transition represent a gap in the local time-line.\n<p>\nGaps occur where there are local date-times that simply do not exist.\nAn example would be when the offset changes from{@code +01:00} to{@code +02:00}.\nThis might be described as 'the clocks will move forward one hour tonight at 1am'."
+          },
+          "overlap": {
+            "type": "boolean",
+            "description": "Does this transition represent an overlap in the local time-line.\n<p>\nOverlaps occur where there are local date-times that exist twice.\nAn example would be when the offset changes from{@code +02:00} to{@code +01:00}.\nThis might be described as 'the clocks will move back one hour tonight at 2am'."
+          }
+        }
+      },
+      "ZoneOffsetTransitionRule2": {
+        "type": "object",
+        "properties": {
+          "month": {
+            "type": "string",
+            "description": "The month of the month-day of the first day of the cutover week.\nThe actual date will be adjusted by the dowChange field.",
+            "enum": [
+              "JANUARY",
+              "FEBRUARY",
+              "MARCH",
+              "APRIL",
+              "MAY",
+              "JUNE",
+              "JULY",
+              "AUGUST",
+              "SEPTEMBER",
+              "OCTOBER",
+              "NOVEMBER",
+              "DECEMBER"
+            ]
+          },
+          "dom": {
+            "type": "integer",
+            "description": "The day-of-month of the month-day of the cutover week.\nIf positive, it is the start of the week where the cutover can occur.\nIf negative, it represents the end of the week where cutover can occur.\nThe value is the number of days from the end of the month, such that\n{@code -1} is the last day of the month,{@code -2} is the second\nto last day, and so on.",
+            "minimum": -127,
+            "maximum": 128
+          },
+          "dow": {
+            "type": "string",
+            "description": "The cutover day-of-week, null to retain the day-of-month.",
+            "enum": [
+              "MONDAY",
+              "TUESDAY",
+              "WEDNESDAY",
+              "THURSDAY",
+              "FRIDAY",
+              "SATURDAY",
+              "SUNDAY"
+            ]
+          },
+          "time": {
+            "type": "string",
+            "description": "The cutover time in the 'before' offset."
+          },
+          "timeEndOfDay": {
+            "type": "boolean",
+            "description": "Whether the cutover time is midnight at the end of day."
+          },
+          "timeDefinition": {
+            "type": "string",
+            "description": "The definition of how the local time should be interpreted.",
+            "enum": [
+              "UTC",
+              "WALL",
+              "STANDARD"
+            ]
+          },
+          "standardOffset": {
+            "$ref": "#/components/schemas/ZoneOffset",
+            "description": "The standard offset at the cutover."
+          },
+          "offsetBefore": {
+            "$ref": "#/components/schemas/ZoneOffset",
+            "description": "The offset before the cutover."
+          },
+          "offsetAfter": {
+            "$ref": "#/components/schemas/ZoneOffset",
+            "description": "The offset after the cutover."
+          },
+          "dayOfMonthIndicator": {
+            "type": "integer",
+            "description": "Gets the indicator of the day-of-month of the transition.\n<p>\nIf the rule defines an exact date then the day is the month of that date.\n<p>\nIf the rule defines a week where the transition might occur, then the day\ndefines either the start of the end of the transition week.\n<p>\nIf the value is positive, then it represents a normal day-of-month, and is the\nearliest possible date that the transition can be.\nThe date may refer to 29th February which should be treated as 1st March in non-leap years.\n<p>\nIf the value is negative, then it represents the number of days back from the\nend of the month where{@code -1} is the last day of the month.\nIn this case, the day identified is the latest possible date that the transition can be."
+          },
+          "dayOfWeek": {
+            "type": "string",
+            "description": "Gets the day-of-week of the transition.\n<p>\nIf the rule defines an exact date then this returns null.\n<p>\nIf the rule defines a week where the cutover might occur, then this method\nreturns the day-of-week that the month-day will be adjusted to.\nIf the day is positive then the adjustment is later.\nIf the day is negative then the adjustment is earlier.",
+            "enum": [
+              "MONDAY",
+              "TUESDAY",
+              "WEDNESDAY",
+              "THURSDAY",
+              "FRIDAY",
+              "SATURDAY",
+              "SUNDAY"
+            ]
+          },
+          "localTime": {
+            "type": "string",
+            "description": "Gets the local time of day of the transition which must be checked with\n{@link #isMidnightEndOfDay()}.\n<p>\nThe time is converted into an instant using the time definition."
+          },
+          "midnightEndOfDay": {
+            "type": "boolean",
+            "description": "Is the transition local time midnight at the end of day.\n<p>\nThe transition may be represented as occurring at 24:00."
+          }
+        }
+      },
+      "ZoneRules": {
+        "type": "object",
+        "properties": {
+          "standardTransitions": {
+            "type": "array",
+            "items": {
+              "type": "integer"
+            },
+            "description": "The transitions between standard offsets (epoch seconds), sorted."
+          },
+          "standardOffsets": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ZoneOffset1"
+            },
+            "description": "The standard offsets."
+          },
+          "savingsInstantTransitions": {
+            "type": "array",
+            "items": {
+              "type": "integer"
+            },
+            "description": "The transitions between instants (epoch seconds), sorted."
+          },
+          "savingsLocalTransitions": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "The transitions between local date-times, sorted.\nThis is a paired array, where the first entry is the start of the transition\nand the second entry is the end of the transition."
+          },
+          "wallOffsets": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ZoneOffset1"
+            },
+            "description": "The wall offsets."
+          },
+          "lastRules": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ZoneOffsetTransitionRule"
+            },
+            "description": "The last rule."
+          },
+          "fixedOffset": {
+            "type": "boolean",
+            "description": "Checks of the zone rules are fixed, such that the offset never varies."
+          },
+          "transitions": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ZoneOffsetTransition",
+              "description": "java.time.zone.ZoneOffsetTransition"
+            },
+            "description": "Gets the complete list of fully defined transitions.\n<p>\nThe complete set of transitions for this rules instance is defined by this method\nand{@link #getTransitionRules()}. This method returns those transitions that have\nbeen fully defined. These are typically historical, but may be in the future.\n<p>\nThe list will be empty for fixed offset rules and for any time-zone where there has\nonly ever been a single offset. The list will also be empty if the transition rules are unknown."
+          },
+          "transitionRules": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ZoneOffsetTransitionRule2",
+              "description": "java.time.zone.ZoneOffsetTransitionRule"
+            },
+            "description": "Gets the list of transition rules for years beyond those defined in the transition list.\n<p>\nThe complete set of transitions for this rules instance is defined by this method\nand{@link #getTransitions()}. This method returns instances of{@link ZoneOffsetTransitionRule}\nthat define an algorithm for when transitions will occur.\n<p>\nFor any given{@code ZoneRules}, this list contains the transition rules for years\nbeyond those years that have been fully defined. These rules typically refer to future\ndaylight saving time rule changes.\n<p>\nIf the zone defines daylight savings into the future, then the list will normally\nbe of size two and hold information about entering and exiting daylight savings.\nIf the zone does not have daylight savings, or information about future changes\nis uncertain, then the list will be empty.\n<p>\nThe list will be empty for fixed offset rules and for any time-zone where there is no\ndaylight saving time. The list will also be empty if the transition rules are unknown."
+          }
+        }
+      },
+      "ZoneId": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Gets the unique time-zone ID.\n<p>\nThis ID uniquely defines this object.\nThe format of an offset based ID is defined by{@link ZoneOffset#getId()}."
+          },
+          "rules": {
+            "$ref": "#/components/schemas/ZoneRules",
+            "description": "Gets the time-zone rules for this ID allowing calculations to be performed.\n<p>\nThe rules provide the functionality associated with a time-zone,\nsuch as finding the offset for a given instant or local date-time.\n<p>\nA time-zone can be invalid if it is deserialized in a Java Runtime which\ndoes not have the same rules loaded as the Java Runtime that stored it.\nIn this case, calling this method will throw a{@code ZoneRulesException}.\n<p>\nThe rules are supplied by{@link ZoneRulesProvider}. An advanced provider may\nsupport dynamic updates to the rules without restarting the Java Runtime.\nIf so, then the result of this method may change over time.\nEach individual call will be still remain thread-safe.\n<p>\n{@link ZoneOffset} will always return a set of rules where the offset never changes."
+          }
+        }
+      },
+      "Chronology": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Gets the ID of the chronology.\n<p>\nThe ID uniquely identifies the{@code Chronology}.\nIt can be used to lookup the{@code Chronology} using{@link #of(String)}."
+          },
+          "calendarType": {
+            "type": "string",
+            "description": "Gets the calendar type of the calendar system.\n<p>\nThe calendar type is an identifier defined by the CLDR and\n<em>Unicode Locale Data Markup Language (LDML)</em> specifications\nto uniquely identify a calendar.\nThe{@code getCalendarType} is the concatenation of the CLDR calendar type\nand the variant, if applicable, is appended separated by \"-\".\nThe calendar type is used to lookup the{@code Chronology} using{@link #of(String)}."
+          },
+          "isoBased": {
+            "type": "boolean",
+            "description": "Checks if this chronology is ISO based.\n<p>\nAn ISO based chronology has the same basic structure as the{@link IsoChronology\n    * ISO chronology}, i.e., the chronology has the same number of months, the number\nof days in each month, and day-of-year and leap years are the same as ISO chronology.\nIt also supports the concept of week-based-year of ISO chronology.\nFor example, the{@link MinguoChronology Minguo},{@link ThaiBuddhistChronology\n    * ThaiThaiBuddhist} and{@link JapaneseChronology Japanese} chronologies are ISO based."
+          }
+        }
+      },
+      "lastModified": {
+        "type": "object",
+        "properties": {
+          "dateTime": {
+            "type": "string",
+            "description": "The local date-time."
+          },
+          "offset": {
+            "$ref": "#/components/schemas/ZoneOffset",
+            "description": "The offset from UTC/Greenwich."
+          },
+          "zone": {
+            "$ref": "#/components/schemas/ZoneId",
+            "description": "The time-zone."
+          },
+          "chronology": {
+            "$ref": "#/components/schemas/Chronology",
+            "description": "Gets the chronology of this date-time.\n<p>\nThe{@code Chronology} represents the calendar system in use.\nThe era and other fields in{@link ChronoField} are defined by the chronology."
+          },
+          "year": {
+            "type": "integer",
+            "description": "Gets the year field.\n<p>\nThis method returns the primitive{@code int} value for the year.\n<p>\nThe year returned by this method is proleptic as per{@code get(YEAR)}.\nTo obtain the year-of-era, use{@code get(YEAR_OF_ERA)}."
+          },
+          "monthValue": {
+            "type": "integer",
+            "description": "Gets the month-of-year field from 1 to 12.\n<p>\nThis method returns the month as an{@code int} from 1 to 12.\nApplication code is frequently clearer if the enum{@link Month}\nis used by calling{@link #getMonth()}."
+          },
+          "month": {
+            "type": "string",
+            "description": "Gets the month-of-year field using the{@code Month} enum.\n<p>\nThis method returns the enum{@link Month} for the month.\nThis avoids confusion as to what{@code int} values mean.\nIf you need access to the primitive{@code int} value then the enum\nprovides the{@link Month#getValue() int value}.",
+            "enum": [
+              "JANUARY",
+              "FEBRUARY",
+              "MARCH",
+              "APRIL",
+              "MAY",
+              "JUNE",
+              "JULY",
+              "AUGUST",
+              "SEPTEMBER",
+              "OCTOBER",
+              "NOVEMBER",
+              "DECEMBER"
+            ]
+          },
+          "dayOfMonth": {
+            "type": "integer",
+            "description": "Gets the day-of-month field.\n<p>\nThis method returns the primitive{@code int} value for the day-of-month."
+          },
+          "dayOfYear": {
+            "type": "integer",
+            "description": "Gets the day-of-year field.\n<p>\nThis method returns the primitive{@code int} value for the day-of-year."
+          },
+          "dayOfWeek": {
+            "type": "string",
+            "description": "Gets the day-of-week field, which is an enum{@code DayOfWeek}.\n<p>\nThis method returns the enum{@link DayOfWeek} for the day-of-week.\nThis avoids confusion as to what{@code int} values mean.\nIf you need access to the primitive{@code int} value then the enum\nprovides the{@link DayOfWeek#getValue() int value}.\n<p>\nAdditional information can be obtained from the{@code DayOfWeek}.\nThis includes textual names of the values.",
+            "enum": [
+              "MONDAY",
+              "TUESDAY",
+              "WEDNESDAY",
+              "THURSDAY",
+              "FRIDAY",
+              "SATURDAY",
+              "SUNDAY"
+            ]
+          },
+          "hour": {
+            "type": "integer",
+            "description": "Gets the hour-of-day field."
+          },
+          "minute": {
+            "type": "integer",
+            "description": "Gets the minute-of-hour field."
+          },
+          "second": {
+            "type": "integer",
+            "description": "Gets the second-of-minute field."
+          },
+          "nano": {
+            "type": "integer",
+            "description": "Gets the nano-of-second field."
+          }
+        }
+      },
+      "ResultString": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "integer",
+            "description": "响应状态码"
+          },
+          "message": {
+            "type": "string",
+            "description": "响应消息"
+          },
+          "data": {
+            "type": "string",
+            "description": "响应数据"
+          },
+          "timestamp": {
+            "type": "integer",
+            "description": "时间戳",
+            "format": "int64"
+          }
+        }
+      }
+    },
+    "securitySchemes": {}
+  },
+  "servers": [
+    {
+      "url": "http://127.0.0.1:8080",
+      "description": "开发环境"
+    }
+  ],
+  "security": []
+}

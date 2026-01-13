@@ -1,0 +1,193 @@
+{
+  "pages": [
+    {
+      "style": {
+        "navigationBarTitleText": "登录",
+        "navigationStyle": "custom"
+      },
+      "path": "pages/login/login"
+    },
+    {
+      "style": {
+        "navigationBarTitleText": "注册",
+        "navigationStyle": "custom"
+      },
+      "path": "pages/register/register"
+    },
+    {
+      "style": {
+        "navigationBarTitleText": "忘记密码"
+      },
+      "path": "pages/forgot/forgot"
+    },
+    {
+      "style": {
+        "navigationBarTitleText": "首页"
+      },
+      "path": "pages/home/home"
+    },
+    {
+      "style": {
+        "navigationBarTitleText": "任务大厅"
+      },
+      "path": "pages/task-hall/task-hall"
+    },
+    {
+      "style": {
+        "navigationBarTitleText": "提交任务"
+      },
+      "path": "pages/submit-task/submit-task"
+    },
+    {
+      "path": "pages/invitation/invitation",
+      "style": {
+        "navigationBarTitleText": "推广奖励"
+      }
+    },
+    {
+      "path": "pages/profile/profile",
+	  "style": {
+	    "navigationBarTitleText": "我的"
+	  }
+    },
+    {
+      "path": "pages/wallet/wallet",
+      "style": {
+        "navigationBarTitleText": "钱包管理"
+      }
+    },
+    {
+      "style": {
+        "navigationBarTitleText": "任务记录"
+      },
+      "path": "pages/task-records/task-records"
+    },
+    {
+      "style": {
+        "navigationBarTitleText": "任务详情"
+      },
+      "path": "pages/task-detail/task-detail"
+    },
+    {
+      "style": {
+        "navigationBarTitleText": "系统公告"
+      },
+      "path": "pages/system-notice/system-notice"
+    },
+    {
+      "style": {
+        "navigationBarTitleText": ""
+      },
+      "path": "pages/daily-rewards/daily-rewards"
+    },
+    {
+      "style": {
+        "navigationBarTitleText": ""
+      },
+      "path": "pages/newcomer-rewards/newcomer-rewards"
+    },
+    {
+      "style": {
+        "navigationBarTitleText": "会员中心"
+      },
+      "path": "pages/cooperation/cooperation"
+    },
+    {
+      "style": {
+        "navigationBarTitleText": "账号绑定管理"
+      },
+      "path": "pages/account-binding/account-binding"
+    },
+    {
+      "style": {
+        "navigationBarTitleText": "编辑信息"
+      },
+      "path": "pages/edit-profile/edit-profile"
+    },
+    {
+      "style": {
+        "navigationBarTitleText": "推广中心"
+      },
+      "path": "pages/promotion/promotion"
+    },
+    {
+      "style": {
+        "navigationBarTitleText": "文章详情"
+      },
+      "path": "pages/article-detail/article-detail"
+    },
+    {
+      "style": {
+        "navigationBarTitleText": "直邀列表"
+      },
+      "path": "pages/direct-list/direct-list"
+    },
+    {
+      "style": {
+        "navigationBarTitleText": "常见问题解答"
+      },
+      "path": "pages/faq/faq"
+    },
+    {
+      "style": {
+        "navigationBarTitleText": "关于我们"
+      },
+      "path": "pages/about/about"
+    },
+    {
+      "style": {
+        "navigationBarTitleText": "提交任务"
+      },
+      "path": "pages/submit-success/submit-success"
+    },
+    {
+      "style": {
+        "navigationBarTitleText": "用户协议"
+      },
+      "path": "pages/user-agreement/user-agreement"
+    },
+    {
+      "style": {
+        "navigationBarTitleText": "隐私政策"
+      },
+      "path": "pages/privacy-policy/privacy-policy"
+    }
+  ],
+  "globalStyle": {
+    "navigationBarBackgroundColor": "#ffffff",
+    "navigationBarTextStyle": "black"
+  },
+  "tabBar": {
+    "selectedColor": "#FFD700",
+    "color": "#999999",
+    "list": [
+      {
+        "selectedIconPath": "static/tabbar/home-s.png",
+        "text": "首页",
+        "iconPath": "static/tabbar/home.png",
+        "pagePath": "pages/home/home"
+      },
+      {
+        "selectedIconPath": "static/tabbar/task-s.png",
+        "text": "悬赏中心",
+        "iconPath": "static/tabbar/task.png",
+        "pagePath": "pages/task-hall/task-hall"
+      },
+      {
+        "selectedIconPath": "static/tabbar/VIP-s.png",
+        "text": "会员专区",
+        "iconPath": "static/tabbar/VIP.png",
+        "pagePath": "pages/cooperation/cooperation"
+      },
+      {
+        "selectedIconPath": "static/tabbar/my-s.png",
+        "text": "我的",
+        "iconPath": "static/tabbar/my.png",
+        "pagePath": "pages/profile/profile"
+      }
+    ],
+    "backgroundColor": "#ffffff",
+    "borderStyle": "black"
+  },
+  "uniIdRouter": {}
+}
