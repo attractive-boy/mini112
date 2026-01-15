@@ -2,15 +2,16 @@
   <view class="container">
     <view class="content">
       <view class="header">
-        <text class="title">重设登录密码</text>
-        <text class="subtitle">验证码验证后即可修改</text>
+        <text class="title">忘记密码</text>
+        <view class="line"></view>
+        <!-- <text class="subtitle">验证码验证后即可修改</text> -->
       </view>
 
       <view class="form">
         <view class="form-group">
           <text class="label">手机号 / 邮箱</text>
           <view class="input-wrapper">
-            <text class="input-icon">📱</text>
+            <text class="input-icon"></text>
             <input class="input" placeholder="请输入手机号或邮箱" v-model="contact" />
           </view>
         </view>
@@ -18,7 +19,7 @@
         <view class="form-group">
           <text class="label">验证码</text>
           <view class="input-wrapper">
-            <text class="input-icon">🔐</text>
+            <text class="input-icon lock"></text>
             <input class="input" placeholder="请输入验证码" v-model="code" />
             <button class="verify-btn btn-secondary" @tap="sendCode" :disabled="countdown > 0">
               {{ countdown > 0 ? `${countdown}秒后重发` : '发送验证码' }}
@@ -29,7 +30,7 @@
         <view class="form-group">
           <text class="label">新密码</text>
           <view class="input-wrapper">
-            <text class="input-icon">🔒</text>
+            <text class="input-icon lock"></text>
             <input class="input" type="password" placeholder="请输入新密码" v-model="newPassword" />
           </view>
         </view>
@@ -37,12 +38,12 @@
         <view class="form-group">
           <text class="label">确认密码</text>
           <view class="input-wrapper">
-            <text class="input-icon">🔒</text>
+            <text class="input-icon lock"></text>
             <input class="input" type="password" placeholder="再次输入新密码" v-model="confirmPassword" />
           </view>
         </view>
 
-        <button class="primary-btn btn-primary" :disabled="!canSubmit" @tap="resetPassword">确认修改</button>
+        <button class="primary-btn btn-primary" style="margin-top: 80rpx;" :disabled="!canSubmit" @tap="resetPassword">确认修改</button>
       </view>
     </view>
   </view>
@@ -168,17 +169,18 @@ export default {
 
 <style scoped>
 .container {
-  min-height: 100vh;
+  /* min-height: 50vh; */
   background-color: #fff8d8;
-  background-image: linear-gradient(180deg, #FFD700, #fff8d8);
+  padding-top: 50rpx;
+  background-image: linear-gradient(180deg, #FFE979, #FFE979);
 }
 
 .content {
   background-color: #fff;
-  border-radius: var(--radius-lg) var(--radius-lg) 0 0;
-  padding: 50rpx 60rpx 40rpx;
+  border-radius: 50rpx;
+  padding: 50rpx 60rpx 80rpx 60rpx;
   box-shadow: 0 -12rpx 30rpx rgba(0, 0, 0, 0.05);
-  height: 700px;
+  /* height: calc(100vh - 50%); */
   transform: translateY(10%);
 }
 
@@ -193,6 +195,16 @@ export default {
   color: var(--text-main);
   margin-bottom: 12rpx;
   display: block;
+  z-index: 100;
+  position: relative;
+}
+.line {
+  width: 200rpx;
+  height: 20rpx;
+  background-color: #FFD700;
+  margin: 20rpx auto;
+  clip-path: polygon(5% 0, 95% 0, 100% 100%, 0 100%);
+  transform: translateY(-180%);
 }
 
 .subtitle {
@@ -205,7 +217,7 @@ export default {
 }
 
 .label {
-  font-size: 26rpx;
+  font-size: 30rpx;
   color: var(--text-main);
   margin-bottom: 12rpx;
   display: block;
@@ -216,16 +228,28 @@ export default {
   display: flex;
   align-items: center;
   padding: 20rpx 24rpx;
-  border-radius: var(--radius-lg);
+  border-radius: 50rpx;
   border: 2rpx solid rgba(0, 0, 0, 0.08);
   background-color: #fff;
   box-shadow: 0 8rpx 18rpx rgba(255, 215, 0, 0.2);
 }
 
 .input-icon {
-  font-size: 24rpx;
-  margin-right: 12rpx;
+  /* font-size: 28rpx; */
+  margin-right: 16rpx;
+  flex-shrink: 0;
+  background-image: url("/static/phone.png");
+  width: 30rpx;
+  height: 30rpx;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
 }
+
+.input-icon.lock {
+  background-image: url("/static/lock.png");
+}
+
 
 .input {
   flex: 1;

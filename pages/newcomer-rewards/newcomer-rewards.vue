@@ -2,13 +2,22 @@
   <view class="container">
     <!-- 背景图片层 -->
     <view class="bg-layer"></view>
+    <view class="nav-bar">
+      <view class="status-bar"></view>
+      <view class="nav-content">
+        <view class="nav-left" @tap="goBack">
+          <text class="back-icon">‹</text>
+        </view>
+        <!-- <text class="nav-title">新人专享</text> -->
+      </view>
+    </view>
     
     <view class="content">
       <!-- 新人专享横幅 -->
       <view class="newcomer-banner">
         <view class="banner-info">
-          <text class="banner-title">新人专享</text>
-          <text class="banner-amount">{{ totalReward }} 元红包奖励</text>
+          <text class="banner-title">每日专享</text>
+          <text class="banner-amount">{{ totalReward }} 元</text>
         </view>
       </view>
 
@@ -63,6 +72,9 @@ export default {
     }
   },
   methods: {
+    goBack() {
+      uni.navigateBack()
+    },
     // 加载任务列表
     async loadTasks() {
       try {
@@ -225,8 +237,8 @@ export default {
   top: 0;
   left: 0;
   width: 100%;
-  height: 66.67vh;
-  background-image: url('/static/daybackg.svg');
+  height: 100vh;
+  background-image: url('/static/daybackg.png');
   background-size: 100% 100%;
   background-repeat: no-repeat;
   z-index: 0;
@@ -234,6 +246,7 @@ export default {
 
 .content {
   padding: 20rpx;
+  padding-top: calc(var(--status-bar-height, 44px) + 88rpx);
   position: relative;
   z-index: 1;
 }
@@ -355,5 +368,50 @@ export default {
   color: #666;
   font-size: 28rpx;
 }
-</style>
 
+.nav-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 2;
+  background: transparent;
+}
+
+.status-bar {
+  height: var(--status-bar-height, 44px);
+}
+
+.nav-content {
+  display: flex;
+  align-items: center;
+  height: 88rpx;
+  padding: 0 30rpx;
+  position: relative;
+}
+
+.nav-left {
+  width: 80rpx;
+  height: 80rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.back-icon {
+  font-size: 40rpx;
+  color: #333;
+  font-weight: bold;
+  /* 放大 */
+  transform: scale(2);
+}
+
+.nav-title {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 32rpx;
+  font-weight: 600;
+  color: #333;
+}
+</style>

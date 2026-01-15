@@ -140,7 +140,7 @@ export default {
 <style scoped>
 .container { 
   min-height: 100vh; 
-  background: linear-gradient(to bottom, #FFDD00, #ffffff);
+  background: linear-gradient(to bottom, #FBF9F3, #FBF9F3);
   padding-top: 20rpx;
 }
 
@@ -164,8 +164,8 @@ export default {
 }
 
 .notice-time {
-  font-size: 24rpx;
-  color: #999;
+  font-size: 30rpx;
+  color: #3D3D3D;
 }
 
 .notice-card {
@@ -217,12 +217,12 @@ export default {
 
 .view-more { 
   font-size: 28rpx; 
-  color: #FF5722;
+  color: #E22600;
   font-weight: 500;
 }
 
 .arrow { 
-  font-size: 32rpx; 
+  font-size: 40rpx; 
   color: #ccc; 
   line-height: 1;
 }
@@ -236,7 +236,7 @@ export default {
 
 .empty-text {
   font-size: 28rpx;
-  color: #999;
+  color: #3D3D3D;
 }
 
 .loading-state {
@@ -248,7 +248,7 @@ export default {
 
 .loading-text {
   font-size: 28rpx;
-  color: #999;
+  color: #3D3D3D;
 }
 
 .notice-modal { 
@@ -261,7 +261,7 @@ export default {
   display: flex; 
   align-items: center; 
   justify-content: center; 
-  z-index: 999; 
+  z-index: 3D3D3D; 
 }
 
 .modal-content { 
@@ -294,7 +294,7 @@ export default {
   border: none; 
   background: transparent; 
   font-size: 36rpx; 
-  color: #999;
+  color: #3D3D3D;
   padding: 0;
   width: 60rpx;
   height: 60rpx;
@@ -320,7 +320,7 @@ export default {
 
 .modal-date { 
   font-size: 24rpx; 
-  color: #999; 
+  color: #3D3D3D; 
 }
 
 .modal-type {

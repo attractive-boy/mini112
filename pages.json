@@ -16,13 +16,15 @@
     },
     {
       "style": {
-        "navigationBarTitleText": "忘记密码"
+        "navigationBarTitleText": "忘记密码",
+        "navigationStyle": "custom"
       },
       "path": "pages/forgot/forgot"
     },
     {
       "style": {
-        "navigationBarTitleText": "首页"
+        "navigationBarTitleText": "首页",
+        "navigationStyle": "custom"
       },
       "path": "pages/home/home"
     },
@@ -70,7 +72,8 @@
     },
     {
       "style": {
-        "navigationBarTitleText": "系统公告"
+        "navigationBarTitleText": "系统公告",
+        "navigationBarBackgroundColor": "#FFDD00"
       },
       "path": "pages/system-notice/system-notice"
     },
@@ -82,7 +85,8 @@
     },
     {
       "style": {
-        "navigationBarTitleText": ""
+        "navigationBarTitleText": "",
+        "navigationStyle": "custom"
       },
       "path": "pages/newcomer-rewards/newcomer-rewards"
     },

@@ -28,7 +28,7 @@
                 <view class="news-title-container">
                   <text class="news-title">公告</text>
                 </view>
-                <view class="news-divider"></view>
+                <!-- <view class="news-divider"></view> -->
                 <swiper class="news-swiper" :vertical="true" :autoplay="true" :interval="3000" :duration="500" :circular="true">
                   <swiper-item v-for="notice in notices" :key="notice.id" @tap="toNotice(notice)">
                     <text class="news-content">{{ notice.title }}</text>
@@ -42,7 +42,7 @@
 
       <view class="section">
         <view class="section-head">
-          <text class="section-title">热门任务</text>
+          <!-- <text class="section-title">热门任务</text> -->
           <scroll-view class="tags-scroll" scroll-x="true" show-scrollbar="false">
             <view class="tags">
               <text 
@@ -67,11 +67,16 @@
               <text class="task-title">{{ task.title }}</text>
               <text class="task-desc">{{ task.summary }}</text>
               <view class="task-meta">
-                <text class="meta-info">{{ task.participantCount }}人已参与</text>
+                <text class="meta-info"><text style="color:#EC3E0E">{{ task.participantCount }}</text>人已参与</text>
                 <text class="meta-info">截至{{ task.deadline }}</text>
               </view>
             </view>
-            <text class="task-reward">￥{{ task.reward }}</text>
+           
+             <view class="reward-container">
+               <text class="task-icon"></text>
+               <text class="task-reward">{{ task.reward }}</text>
+             </view>
+            
           </view>
         </view>
       </view>
@@ -232,7 +237,7 @@ export default {
 <style scoped>
 /* 定义CSS变量 */
 page {
-  --bg-page: #f5f5f5;
+  --bg-page: #fff;
   --text-main: #333333;
   --text-sub: #666666;
   --brand-accent: #FF6B35;
@@ -243,7 +248,7 @@ page {
 
 .container {
   min-height: 100vh;
-  background: #f5f5f5;
+  background: #fff;
 }
 
 .scroll {
@@ -251,7 +256,7 @@ page {
 }
 
 .hero-section {
-  margin: 20rpx 30rpx 0;
+  /* margin: 20rpx 30rpx 0; */
 }
 
 .hero-banner {
@@ -262,8 +267,8 @@ page {
 
 .banner-swiper {
   width: 100%;
-  height: 300rpx;
-  border-radius: 16rpx;
+  height: 400rpx;
+  /* border-radius: 16rpx; */
   overflow: hidden;
   z-index: 1;
 }
@@ -271,14 +276,26 @@ page {
 .banner-image {
   width: 100%;
   height: 100%;
-  border-radius: 16rpx;
+  /* border-radius: 16rpx; */
+}
+.reward-container{
+  display: flex;
+  align-items: center;
+}
+.task-icon {
+  display: block;
+  width: 40rpx;
+  height: 40rpx;
+  margin-right: 10rpx;
+  background-image: url('/static/coin.png');
+  background-size: 100% 100%;
 }
 
 .feature-card {
   position: relative;
   top: 50px;
   z-index: 2;
-  margin: -120rpx 20rpx 30rpx; /* 减少负边距 */
+  margin: -250rpx 50rpx 30rpx; /* 减少负边距 */
   background: #fff;
   border-radius: 32rpx;
   padding: 28rpx 24rpx;
@@ -300,7 +317,7 @@ page {
   border-radius: 24rpx;
   padding: 24rpx 16rpx;
   text-align: center;
-  box-shadow: 0 6rpx 16rpx rgba(0, 0, 0, 0.06);
+  /* box-shadow: 0 6rpx 16rpx rgba(0, 0, 0, 0.06); */
 }
 
 .quick-icon-img {
@@ -308,27 +325,37 @@ page {
   height: 80rpx;
   margin: 0 auto 12rpx;
   display: block;
+  transform: scale(2); /* 内容放大20%，宽高不变 */
 }
 
 .quick-label {
   font-size: 24rpx;
-  color: #333333;
+  color: #3D3D3D;
   display: block;
 }
 
 .news-section {
-  margin: 20rpx 0;
+  margin:  0;
 }
 
 .news-card {
-  background: #fff;
+  /* background: #fff; */
   border-radius: 16rpx;
-  padding: 24rpx;
-  box-shadow: 0 4rpx 12rpx rgba(0, 0, 0, 0.06);
+  padding: 20rpx;
+  display: flex;
+  flex-direction: column;
+  gap: 12rpx;
+  /* 水平居中 */
+  /* align-items: center; */
+  /* box-shadow: 0 4rpx 12rpx rgba(0, 0, 0, 0.06); */
+  background-color: rgba(255, 164, 0, 0.2);
+  height: 20rpx;
 }
 
 .news-header {
   display: flex;
+  position: relative;
+  top: -10rpx;
   align-items: center;
   gap: 20rpx;
 }
@@ -336,14 +363,19 @@ page {
 .news-title-container {
   display: flex;
   align-items: baseline;
-  gap: 8rpx;
+  gap: 0rpx;
   flex-shrink: 0;
 }
 
 .news-title {
-  font-size: 32rpx;
+  font-size: 25rpx;
   font-weight: 700;
-  color: #FF6B35;
+  color: #fff;
+  background: #FF6B35;
+  /* padding: 4rpx 16rpx; */
+  transform: skewX(-12deg);
+  display: inline-block;
+  border-radius: 8rpx;
 }
 
 .news-subtitle {
@@ -365,8 +397,8 @@ page {
 }
 
 .news-content {
-  font-size: 26rpx;
-  color: #333333;
+  font-size: 24rpx;
+  color: #3D3D3D;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -374,7 +406,7 @@ page {
 }
 
 .section {
-  margin: 0 30rpx 40rpx;
+  margin: 90rpx 10rpx 40rpx;
   background: #fff;
   border-radius: 16rpx;
   padding: 28rpx;
@@ -393,6 +425,12 @@ page {
 .tags-scroll {
   margin-top: 12rpx;
   white-space: nowrap;
+  /* 隐藏滚动条 */
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE 10+ */
+}
+.tags-scroll::-webkit-scrollbar {
+  display: none; /* Chrome Safari */
 }
 
 .tags {
@@ -402,19 +440,37 @@ page {
 }
 
 .tag {
-  background: #fffbe6;
-  color: #FF6B35;
+  background: none;
+  color: rgba(61,61,61,0.8);
   border-radius: 12rpx;
-  padding: 6rpx 14rpx;
-  font-size: 22rpx;
+  padding: 0 14rpx 0; /* 去掉底部 padding，文字贴底 */
+  font-size: 30rpx;
   white-space: nowrap;
   flex-shrink: 0;
   transition: all 0.3s ease;
+  line-height: 1; /* 行高设为 1，确保文字紧贴底部 */
 }
 
 .tag.active {
-  background: #FF6B35;
-  color: #fff;
+  background: none;
+  color: #3D3D3D;
+  font-size: 38rpx;
+  font-weight: bold;
+  /* 橙色虚线：位于文字下方 2rpx，长度 40rpx，居中 */
+  position: relative;
+}
+.tag.active::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 150rpx;
+  height: 15rpx;
+  border-radius: 999rpx;
+  background: linear-gradient(180deg, #FFD239 0%, #FF7B33 100%);
+  box-shadow: 0 8rpx 16rpx 0 #FDD63E;
+  filter: blur(10rpx);
 }
 
 .task-list {
@@ -425,11 +481,12 @@ page {
 
 .task-card {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   gap: 20rpx;
   padding: 24rpx;
   border-radius: 16rpx;
-  background: #f5f5f5;
+  background: #fff;
+  box-shadow: 0 4rpx 12rpx rgba(0, 0, 0, 0.08);
 }
 
 .task-avatar {
@@ -455,8 +512,12 @@ page {
 
 .task-desc {
   font-size: 24rpx;
-  color: #666666;
+  color: #3D3D3D;
   line-height: 1.4;
+  background-color: #F1F1F1;
+  width: fit-content;
+  padding: 2rpx 6rpx;
+  border-radius: 8rpx;
 }
 
 .task-meta {
