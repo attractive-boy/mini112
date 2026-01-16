@@ -61,21 +61,23 @@
         <text class="notice-item">2.邀请行为需符合平台规则，系统将自动记录邀请数据</text>
       </view>
       <view class="tools-section">
-        <view class="tool-item" @click="showPosterTool">
-          <view class="tool-icon">📋</view>
-          <view class="tool-info">
+        <view class="tool-item" @click="showPosterTool" style="background-color: #FFE0BF;">
+          
+          <view class="tool-info" >
             <text class="tool-title">推广攻略</text>
             <text class="tool-desc">收益玩法汇总</text>
           </view>
-          <text class="tool-arrow">></text>
+          <view class="tool-icon" :style="{ backgroundImage: `url(${ $staticUrl('/static/4b13e081-7acc-4c49-9641-e26cf449475b@1x.png') })` }"></view>
+          <!-- <text class="tool-arrow">></text> -->
         </view>
-        <view class="tool-item" @click="showCaseTool">
-          <view class="tool-icon">📄</view>
-          <view class="tool-info">
+        <view class="tool-item" @click="showCaseTool" style="background-color: #CEE6FF;">
+          
+          <view class="tool-info" >
             <text class="tool-title">推广案例</text>
-            <text class="tool-desc">精准找到用户</text>
+            <text class="tool-desc" style="background: linear-gradient(75deg, #51CEFF 0%, #038AFD 99%);">精准找到用户</text>
           </view>
-          <text class="tool-arrow">></text>
+          <view class="tool-icon" :style="{ backgroundImage: `url(${ $staticUrl('/static/ae6562c7-8f74-4c1f-b9e7-48e642acd54b@1x.png') })` }"></view>
+          <!-- <text class="tool-arrow">></text> -->
         </view>
       </view>
     </view>
@@ -299,11 +301,12 @@ export default {
   border-radius: 20rpx;
   padding: 30rpx;
   margin-bottom: 30rpx;
-  transform: translateY(-60rpx);
+  transform: translateY(-100rpx);
 }
 
 .ranking-title {
-  font-size: 32rpx;
+  font-size: 40rpx;
+  margin-left: 30rpx;
   font-weight: bold;
   color: #333;
   display: block;
@@ -315,6 +318,7 @@ export default {
   align-items: center;
   justify-content: space-around;
   padding: 20rpx 0;
+  border-radius: 20rpx 20rpx 0 0;
   border-bottom: 2rpx solid #f0f0f0;
   margin-bottom: 20rpx;
   background: #FFE077;
@@ -416,6 +420,7 @@ export default {
   display: flex;
   gap: 20rpx;
   margin-bottom: 30rpx;
+  padding: 0 60rpx;
 }
 
 .tool-item {
@@ -430,6 +435,15 @@ export default {
 
 .tool-icon {
   font-size: 48rpx;
+  width: 80rpx;
+  height: 80rpx;
+  border-radius: 50%;
+  background-color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-position: center;
+  background-repeat: no-repeat;
 }
 
 .tool-info {
@@ -442,11 +456,15 @@ export default {
   color: #333;
   display: block;
   margin-bottom: 8rpx;
+  text-align: center;
 }
 
 .tool-desc {
-  font-size: 24rpx;
-  color: #666;
+  font-size: 20rpx;
+  color: #fff;
+  background: linear-gradient(75deg, #FE976D 0%, #F7554C 100%);
+  padding: 8rpx 5rpx;
+  border-radius: 10rpx;
 }
 
 .tool-arrow {
