@@ -15,7 +15,7 @@
     <!-- 底部客服组件 -->
     <view class="bottom-service">
       <view class="service-content">
-        <image src="/static/aaaaa.svg" class="service-icon" mode="aspectFit"></image>
+        <image :src="$staticUrl('/static/aaaaa.svg')" class="service-icon" mode="aspectFit"></image>
         <view class="service-left">
           <text class="service-title">平台客服</text>
           <text class="service-desc">添加客服微信可获取任务协助与问题处理</text>

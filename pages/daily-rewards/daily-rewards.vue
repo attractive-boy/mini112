@@ -1,33 +1,54 @@
 <template>
+
   <view class="container">
+    <!-- 导航栏 -->
+    <view class="navbar">
+      <view class="navbar-left" @tap="goBack">
+        <text class="back-icon">‹</text>
+      </view>
+      <!-- <text class="navbar-title">每日任务</text> -->
+      <view class="navbar-right"></view>
+    </view>
     <!-- 背景图片层 -->
-    <view class="bg-layer"></view>
+    <view class="bg-layer" :style="{ backgroundImage: `url(${ $staticUrl('/static/dayfl.png') })` }"></view>
 
     <view class="content">
       <view class="daily-banner">
         <view class="banner-content">
           <text class="banner-title">每日专享</text>
+
+          <text class="banner-desc-num">2.6 <text class="banner-desc-unit">元</text></text>
+
           <view class="time-display">
             <text class="time-block">{{ timeData.hours }}</text>
-            <text class="time-separator">:</text>
+            <text class="time-separator">时</text>
             <text class="time-block">{{ timeData.minutes }}</text>
-            <text class="time-separator">:</text>
+            <text class="time-separator">分</text>
             <text class="time-block">{{ timeData.seconds }}</text>
+            <text class="time-separator">秒</text>
+          </view>
+          <view class="banner-desc">
+            <text>完成的任务需大于0.3元</text>
           </view>
         </view>
       </view>
       <!-- 任务进度列表 -->
       <view class="progress-section" v-if="!loading">
-        <view class="progress-item" v-for="(task, index) in dailyTaskData.tasks" :key="task.taskId">
-          <view class="task-number">{{ index + 1 }}</view>
-          <view class="task-info">
-            <text class="task-title">{{ task.taskName }}</text>
-            <text class="task-desc">{{ task.taskDescription }}</text>
-          </view>
-          <view class="task-reward">
-            <text class="reward-amount">+{{ task.rewardAmount.toFixed(2) }}元</text>
-            <view class="claim-btn" :class="getButtonClass(task)" @tap="handleTaskAction(task)">
-              {{ getButtonText(task) }}
+        <view class="progress-list">
+          <view class="progress-item" v-for="(task, index) in dailyTaskData.tasks" :key="task.taskId">
+            <view class="task-number">{{ index + 1 }}</view>
+            <view class="task-info">
+              <view class="task-content">
+                <text class="task-title">{{ task.taskName }}  </text>
+                <text class="reward-amount">+{{ task.rewardAmount.toFixed(2) }}元</text>
+              </view>
+              <text class="task-desc">{{ task.taskDescription }}</text>
+            </view>
+            <view class="task-reward">
+             
+              <view class="claim-btn" :class="getButtonClass(task)" @tap="handleTaskAction(task)">
+                {{ getButtonText(task) }}
+              </view>
             </view>
           </view>
         </view>
@@ -39,7 +60,7 @@
       </view>
 
       <!-- 注意事项 -->
-      <view class="warning-section">
+      <!-- <view class="warning-section">
         <view class="warning-header">
           <text class="warning-icon">⚠️</text>
           <text class="warning-title">注意事项</text>
@@ -48,7 +69,7 @@
         <text class="warning-desc">
           禁止使用非法手段获取奖励!!!!
         </text>
-      </view>
+      </view> -->
     </view>
   </view>
 </template>
@@ -91,6 +112,9 @@ export default {
         this.updateTime()
       }, 1000)
     },
+    goBack() {
+      uni.navigateBack()
+    },
     stopTimer() {
       if (this.timer) {
         clearInterval(this.timer)
@@ -113,7 +137,7 @@ export default {
           url: '/api/daily-task/list',
           method: 'GET'
         })
-        
+
         if (response.code === 200 && response.data) {
           this.dailyTaskData = response.data
         }
@@ -134,21 +158,21 @@ export default {
         uni.showLoading({
           title: '签到中...'
         })
-        
+
         const response = await request({
           url: '/api/daily-task/sign-in',
           method: 'GET'
         })
-        
+
         if (response.code === 200 && response.data) {
           const { success, message, rewardAmount } = response.data
-          
+
           if (success) {
             uni.showToast({
               title: message || `签到成功！`,
               icon: 'success'
             })
-            
+
             // 重新加载任务列表
             await this.loadDailyTasks()
           } else {
@@ -223,13 +247,40 @@ export default {
   flex-direction: column;
 }
 
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: var(--nav-bar-height, 44px);
+  /* background-color: #FFDD00; */
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 30rpx;
+  z-index: 1000;
+}
+
+.nav-left {
+  width: 80rpx;
+  height: 80rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.back-icon {
+  font-size: 60rpx;
+  color: #333;
+  font-weight: bold;
+}
+
 .bg-layer {
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
-  height: 50vh;
-  background-image: url('/static/3530d48b-4300-4c3d-899a-aec565837df4@1x.png');
+  height: 100vh;
   background-size: 100% 100%;
   background-repeat: no-repeat;
   z-index: 0;
@@ -254,34 +305,62 @@ export default {
   position: relative;
   z-index: 2;
   padding: 40rpx 0;
-  display: flex;
+  /* display: flex;
   flex-direction: column;
   align-items: flex-start;
+    */
 }
 
 .banner-title {
   font-size: 72rpx;
   font-weight: bold;
   color: white;
-  margin-bottom: 20rpx;
+  margin-top: 1.3rem;
+  margin-left: 1.3rem;
+  /* margin-bottom: 10rpx; */
   display: block;
-  text-align: center;
+  text-align: left;
   width: 100%;
+}
+
+.banner-desc-num {
+  font-size: 90rpx;
+  font-weight: bold;
+  color: #FF5222;
+  /* margin-top: 1.3rem; */
+  margin-left: 1.3rem;
+  margin-bottom: 20rpx;
+  display: inline-block;
+  text-align: left;
+
+}
+
+.banner-desc-unit {
+  font-size: 50rpx;
+  font-weight: bold;
+  color: white;
+  margin-top: 1.3rem;
+  /* margin-left: 1.3rem; */
+  margin-bottom: 20rpx;
+  display: inline-block;
+  text-align: left;
+
 }
 
 .time-display {
   margin-top: 1.3rem;
   display: flex;
-  align-items: center;
+  align-items: flex-end;
   justify-content: center;
   gap: 10rpx;
+  margin-top: 7.3rem;
   width: 100%;
 }
 
 .time-block {
-  background-color: black;
+  background-color: #3D3D3D;
   color: white;
-  padding: 10rpx 15rpx;
+  padding: 5rpx 5rpx;
   border-radius: 10rpx;
   font-size: 40rpx;
   font-weight: bold;
@@ -290,22 +369,43 @@ export default {
 }
 
 .time-separator {
-  color: black;
-  font-size: 40rpx;
+  color: #3D3D3D;
+  font-size: 20rpx;
   font-weight: bold;
+  line-height: 40rpx;
+  display: block;
+  margin-top: 10rpx;
+}
+
+.banner-desc {
+  width: calc(100% - 2.6rem);
+  font-size: 32rpx;
+  font-weight: bold;
+  color: white;
+  margin-top: 10rpx;
+  margin-left: 1.3rem;
+  margin-bottom: 20rpx;
+  display: inline-block;
+  text-align: center;
 }
 
 .progress-section {
-  margin-top: 35%;
-  background: white;
+  /* border-width: 50rpx;
+  border-color: #FFCE00; */
+  /* margin-top: 35%; */
+  background: #FFC911;
   border-radius: 20rpx;
-  padding: 30rpx;
-  margin-bottom: 180rpx; /* 增加底部间距，避免被注意事项遮挡 */
+  padding: 25rpx;
+  margin-bottom: 180rpx;
+  /* 增加底部间距，避免被注意事项遮挡 */
 }
 
 .progress-item {
   display: flex;
+  background: white;
   align-items: center;
+  border-radius: 20rpx;
+  padding: 10rpx;
   gap: 20rpx;
   margin-bottom: 30rpx;
 }
@@ -315,15 +415,15 @@ export default {
 }
 
 .task-number {
-  width: 60rpx;
-  height: 60rpx;
+  width: 40rpx;
+  height: 40rpx;
   border-radius: 50%;
-  background: #FFCE00;
+  background: #FE9E01;
   display: flex;
   align-items: center;
   justify-content: center;
   font-weight: bold;
-  color: #333;
+  color: #fff;
   font-size: 28rpx;
   flex-shrink: 0;
 }
@@ -332,11 +432,19 @@ export default {
   flex: 1;
   min-width: 0;
 }
+.task-content {
+  flex: 1;
+  min-width: 0;
+  /* 两端对齐 */
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
 
 .task-title {
   font-size: 28rpx;
   color: #333;
-  display: block;
+  display: inline-block;
   margin-bottom: 8rpx;
   font-weight: bold;
   word-wrap: break-word;
@@ -360,13 +468,14 @@ export default {
   font-size: 28rpx;
   color: #FF6B35;
   font-weight: bold;
-  display: block;
-  margin-bottom: 15rpx;
+  display: inline-block;
+  /* margin-bottom: 15rpx; */
 }
 
 .claim-btn {
   width: 100rpx;
   height: 60rpx;
+  padding: 2rpx 10rpx;
   border-radius: 30rpx;
   font-size: 24rpx;
   font-weight: bold;

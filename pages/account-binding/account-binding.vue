@@ -5,7 +5,7 @@
       <view class="hero-section">
         <!-- 插图 -->
         <view class="illustration">
-          <image class="hero-image" src="/static/456270fd-9af0-4ed7-810c-cf2d69b75bc7@1x.png" mode="aspectFit" />
+          <image class="hero-image" :src="$staticUrl('/static/456270fd-9af0-4ed7-810c-cf2d69b75bc7@1x.png')" mode="aspectFit" />
         </view>
         <view>
           <!-- 标题文案 -->

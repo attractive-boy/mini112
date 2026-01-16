@@ -16,8 +16,9 @@
       <!-- 新人专享横幅 -->
       <view class="newcomer-banner">
         <view class="banner-info">
-          <text class="banner-title">每日专享</text>
-          <text class="banner-amount">{{ totalReward }} 元</text>
+          <text class="banner-title">新人专享</text>
+          <text class="banner-amount">{{ totalReward }} 
+            <text class="banner-amount-sub">元红包奖励</text></text>
         </view>
       </view>
 
@@ -26,7 +27,7 @@
         <view class="task-item" v-for="(task, index) in tasks" :key="task.id">
           <view class="task-number">{{ index + 1 }}</view>
           <view class="task-info">
-            <text class="task-title">{{ task.name }}+{{ task.rewardAmount }}元</text>
+            <text class="task-title">{{ task.name }}<text class="task-amount">+{{ task.rewardAmount }}元</text></text>
             <text class="task-desc">{{ task.description }}</text>
           </view>
           <view class="task-reward">
@@ -38,6 +39,16 @@
               {{ getButtonText(task) }}
             </view>
           </view>
+        </view>
+      </view>
+
+      <!-- 每日福利按钮 -->
+      <view class="daily-reward-btn">
+        <view
+         class="daily-reward-btn-word"
+          @tap="claimDailyReward"
+        >
+          每日福利
         </view>
       </view>
 
@@ -260,6 +271,7 @@ export default {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
+  margin-left: 20rpx;
 }
 
 .banner-title {
@@ -268,14 +280,22 @@ export default {
   color: #333;
   display: block;
   margin-bottom: 15rpx;
-  color: #FFB200;
+  margin-left: 20rpx;
+  color: #FB9700;
 }
 
 .banner-amount {
-  font-size: 56rpx;
-  font-weight: bold;
-  color: #ff6b35;
+  font-size: 80rpx;
+  font-weight: 1000;
+  color: #FF4800;
   display: block;
+  margin-left: 30rpx;
+}
+.banner-amount-sub {
+  font-size: 42rpx;
+  font-weight: bold;
+  color: #FF6200;
+  display: inline-block;
 }
 
 .task-section {
@@ -305,12 +325,12 @@ export default {
   width: 50rpx;
   height: 50rpx;
   border-radius: 50%;
-  background: #ffd700;
+  background: #FE9E01;
   display: flex;
   align-items: center;
   justify-content: center;
   font-weight: bold;
-  color: #333;
+  color: #fff;
   font-size: 24rpx;
 }
 
@@ -325,6 +345,13 @@ export default {
   display: block;
   margin-bottom: 8rpx;
 }
+
+.task-amount {
+  font-size: 24rpx;
+  color: #E50000;
+}
+
+
 
 .task-desc {
   font-size: 24rpx;
@@ -362,6 +389,26 @@ export default {
   background-color: #ccc;
 }
 
+.daily-reward-btn {
+  margin-top: 30rpx;
+  width: calc(100vw - 5.8125rem);
+  margin: 0 auto;
+  height: 80rpx;
+  padding: 0 20rpx;
+  background-color: #FFD833;
+  border-radius: 10rpx;
+  box-shadow: 0 2rpx 10rpx rgba(0,0,0,0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.daily-reward-btn-word {
+  font-size: 32rpx;
+  font-weight: bold;
+  color: #F02B01;
+
+}
+
 .loading {
   text-align: center;
   padding: 40rpx;
@@ -386,7 +433,7 @@ export default {
   display: flex;
   align-items: center;
   height: 88rpx;
-  padding: 0 30rpx;
+  padding: 0 10rpx;
   position: relative;
 }
 
@@ -399,9 +446,9 @@ export default {
 }
 
 .back-icon {
-  font-size: 40rpx;
+  font-size: 30rpx;
   color: #333;
-  font-weight: bold;
+  /* font-weight: bold; */
   /* 放大 */
   transform: scale(2);
 }

@@ -43,7 +43,8 @@
     {
       "path": "pages/invitation/invitation",
       "style": {
-        "navigationBarTitleText": "推广奖励"
+        "navigationBarTitleText": "",
+        "navigationStyle": "custom"
       }
     },
     {
@@ -79,7 +80,8 @@
     },
     {
       "style": {
-        "navigationBarTitleText": ""
+        "navigationBarTitleText": "",
+        "navigationStyle": "custom"
       },
       "path": "pages/daily-rewards/daily-rewards"
     },

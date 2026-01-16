@@ -1,7 +1,7 @@
 ﻿<template>
   <view class="container">
     <view class="content">
-      <image class="dev-icon" src="/static/3a582535-e694-4171-a2e7-d897d08e1536@1x.png"></image>
+      <image class="dev-icon" :src="$staticUrl('/static/3a582535-e694-4171-a2e7-d897d08e1536@1x.png')"></image>
       <view class="dev-subtitle">敬请期待</view>
     </view>
   </view>

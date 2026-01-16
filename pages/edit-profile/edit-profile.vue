@@ -55,7 +55,7 @@ export default {
       }
     },
     getAvatarUrl(avatar) {
-      if (!avatar) return '/static/boy.png'  // 使用boy.png作为默认头像
+      if (!avatar) return this.$staticUrl('/static/boy.png')  // 使用boy.png作为默认头像
       return `${BASE_URL}/api/file/proxy/${avatar}`
     },
     goBack() {

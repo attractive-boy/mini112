@@ -1,20 +1,34 @@
 <template>
   <view class="container">
+    <view class="nav-bar">
+      <view class="status-bar"></view>
+      <view class="nav-content">
+        <view class="nav-left" @tap="goBack">
+          <text class="back-icon">‹</text>
+        </view>
+        <!-- <text class="nav-title">新人专享</text> -->
+      </view>
+    </view>
     <view class="content">
       <view class="invitation-banner">
         <text class="banner-title">邀请好友，轻松赚佣金！</text>
         <text class="banner-subtitle">好友完成任务后可以获得奖励</text>
         <view class="character-section">
-          <image src="/static/ad6f2e1d-7383-4f85-9c57-81e6a6e2bdff@1x.png" />
+          <!-- <image src="/static/invitenew.png" /> -->
         </view>
         <view class="invite-code-section">
           <view style="display: flex; align-items: center; margin-bottom: 20rpx; justify-content: space-between;">
             <text class="invite-label">我的专属邀请码</text>
-            <view class="copy-btn" @click="copyCode">复制</view>
+            <view class="copy-btn" @click="copyCode"></view>
           </view>
           <view class="invite-code-container">
             <text class="invite-code">{{ userInfo.inviteCode || 'X8F3B92A' }}</text>
           </view>
+        </view>
+        <!-- 两个按钮 -->
+         <view class="btn-container">
+          <view class="btn-item" @click="showInviteCode">生成推广海报</view>
+          <view class="btn-item share"  @click="showInviteRules">一键分享</view>
         </view>
       </view>
       <view class="ranking-section">
@@ -153,28 +167,35 @@ export default {
 <style scoped>
 .container {
   min-height: 100vh;
-  background: #f5f5f5;
+  background: #fff;
   padding-bottom: 120rpx;
 }
 
 .content {
-  padding: 20rpx;
+  /* padding: 20rpx; */
+  
 }
 
 .invitation-banner {
-  background: linear-gradient(135deg, #FFD700, #FFA500);
-  border-radius: 20rpx;
-  text-align: center;
+  background: url('/static/invitenew.png') no-repeat center center;
+  /* background-size: 100% 100%; */
+  background-size: 100% auto;
+  /* border-radius: 20rpx; */
+  text-align: left;
   margin-bottom: 30rpx;
   padding: 12px;
+  /* height: 300rpx; */
+  display: block;
 }
 
 .banner-title {
-  font-size: 40rpx;
+  font-size: 50rpx;
   font-weight: bold;
+  margin-top: 50rpx;
   color: #333;
   display: block;
   margin-bottom: 15rpx;
+  margin-left: 10rpx;
 }
 
 .banner-subtitle {
@@ -182,6 +203,7 @@ export default {
   color: #666;
   display: block;
   margin-bottom: 40rpx;
+  margin-left: 10rpx;
 }
 
 .character-section {
@@ -195,12 +217,15 @@ export default {
 
 .invite-code-section {
   background: #FFE8A7;
-  padding: 30px;
+  padding: 20px;
   border-radius: 10px;
+  font-size: 50rpx;
+  margin: 0 40rpx;
+  transform: translateY(-60%);
 }
 
 .invite-label {
-  font-size: 28rpx;
+  font-size: 35rpx;
   color: #333;
   display: block;
 }
@@ -213,6 +238,9 @@ export default {
   background: rgba(255, 255, 255, 0.9);
   border-radius: 30rpx;
   height: 52px;
+  margin-left: 10rpx;
+  margin-right: 10rpx;
+  
 }
 
 .invite-code {
@@ -221,18 +249,49 @@ export default {
   color: #333;
   letter-spacing: 4rpx;
 }
+.btn-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 30rpx;
+  transform: translateY(-120%);
+  height: 80rpx;
+}
 
-.copy-btn {
-  width: 120rpx;
-  height: 50rpx;
-  background-color: #4CAF50;
+.btn-item {
+  width: 200rpx;
+  height: 80rpx;
+  background-color: #FFAC46;
   color: white;
   border: none;
-  border-radius: 25rpx;
+  border-radius: 10rpx;
+  font-size: 32rpx;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 5rpx 40rpx;
+}
+.share {
+  background-color: #FFDF86;
+  color: #333;
+}
+
+
+
+.copy-btn {
+  width: 30rpx;
+  height: 30rpx;
+  /* background-color: #4CAF50; */
+  color: white;
+  border: none;
+  /* border-radius: 25rpx; */
   font-size: 22rpx;
   display: flex;
   align-items: center;
   justify-content: center;
+  background-image: url('/static/copyimg.png');
+  background-size: 100% 100%;
 }
 
 .ranking-section {
@@ -240,6 +299,7 @@ export default {
   border-radius: 20rpx;
   padding: 30rpx;
   margin-bottom: 30rpx;
+  transform: translateY(-60rpx);
 }
 
 .ranking-title {
@@ -321,7 +381,8 @@ export default {
   text-align: right;
 }
 
-.loading, .empty {
+.loading,
+.empty {
   text-align: center;
   padding: 40rpx 0;
   color: #999;
@@ -391,5 +452,51 @@ export default {
 .tool-arrow {
   font-size: 24rpx;
   color: #ccc;
+}
+
+.nav-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 2;
+  background: transparent;
+}
+
+.status-bar {
+  height: var(--status-bar-height, 44px);
+}
+
+.nav-content {
+  display: flex;
+  align-items: center;
+  height: 88rpx;
+  padding: 0 10rpx;
+  position: relative;
+}
+
+.nav-left {
+  width: 80rpx;
+  height: 80rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.back-icon {
+  font-size: 30rpx;
+  color: #333;
+  /* font-weight: bold; */
+  /* 放大 */
+  transform: scale(2);
+}
+
+.nav-title {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 32rpx;
+  font-weight: 600;
+  color: #333;
 }
 </style>

@@ -372,7 +372,7 @@ export default {
   display: flex;
   align-items: center;
   height: 88rpx;
-  padding: 0 30rpx;
+  padding: 0 10rpx;
   position: relative;
 }
 

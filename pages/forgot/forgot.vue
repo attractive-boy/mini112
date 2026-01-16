@@ -38,8 +38,8 @@
         <view class="form-group">
           <text class="label">确认密码</text>
           <view class="input-wrapper">
-            <text class="input-icon lock"></text>
-            <input class="input" type="password" placeholder="再次输入新密码" v-model="confirmPassword" />
+            <text class="input-icon lock" :style="{ backgroundImage: `url(${this.$staticUrl('/static/lock.png')})` }"></text>
+            <input class="input" :style="{ backgroundImage: `url(${this.$staticUrl('/static/lock.png')})` }" type="password" placeholder="再次输入新密码" v-model="confirmPassword" />
           </view>
         </view>
 
@@ -238,7 +238,7 @@ export default {
   /* font-size: 28rpx; */
   margin-right: 16rpx;
   flex-shrink: 0;
-  background-image: url("/static/phone.png");
+  /* background-image: url("/static/phone.png"); */
   width: 30rpx;
   height: 30rpx;
   background-size: contain;
