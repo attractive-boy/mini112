@@ -1,14 +1,30 @@
 ﻿<template>
-  <view class="container">
+  <view class="container" :style="{ backgroundImage: `url(${$staticUrl('/static/taskdt.png')})` }">
     <view class="search-section">
-      <view class="search-bar">
-        <text class="search-icon">🔍</text>
-        <input class="search-input" placeholder="请输入任务关键词" v-model="searchKeyword" @input="onSearchInput" />
+      <view class="file-icon" :style="{ backgroundImage: `url(${$staticUrl('/static/file.png')})` }">
       </view>
-    </view>
+      <view class="search-bar">
 
-    <!-- 任务分类标签栏 -->
-    <view class="section-head">
+        <view class="search-icon" :style="{ backgroundImage: `url(${$staticUrl('/static/search.png')})` }"></view>
+        <input class="search-input" placeholder="请输入任务关键词" v-model="searchKeyword" @input="onSearchInput" />
+
+
+      </view>
+      <view class="filter-icon" :style="{ backgroundImage: `url(${$staticUrl('/static/filter.png')})` }"></view>
+    </view>
+    <view class="filter-section-container">
+      <view class="section">
+        <view class="section-head">
+          <!-- <text class="section-title">热门任务</text> -->
+          <scroll-view class="tags-scroll" scroll-x="true" show-scrollbar="false">
+            <view class="tags">
+              <text class="tag" :class="{ active: selectedTag === tag }" v-for="tag in taskTags" :key="tag"
+                @tap="onTagClick(tag)">{{ tag }}</text>
+            </view>
+          </scroll-view>
+        </view>
+        <!-- 任务分类标签栏 -->
+        <!-- <view class="section-head">
       <text class="section-title">热门标签</text>
       <scroll-view class="tags-scroll" scroll-x="true" show-scrollbar="false">
         <view class="tags">
@@ -20,10 +36,10 @@
             @tap="onTagClick(tag)"
           >{{ tag }}</text>
         </view>
-      </scroll-view>
-      
-      <!-- 点击式筛选组件 -->
-      <view class="filter-section">
+      </scroll-view> -->
+
+        <!-- 点击式筛选组件 -->
+        <!-- <view class="filter-section">
         <view class="filter-item" 
               :class="{ active: filterParams.sortBy === 'default' }"
               @click="onFilterClick('default')">
@@ -59,60 +75,68 @@
             {{ filterParams.sortOrder === 'desc' ? '↓' : '↑' }}
           </text>
         </view>
+      </view> -->
       </view>
-    </view>
 
-    <!-- 任务列表 -->
-    <view class="task-section">
-      <text class="section-title">任务推荐</text>
-      <text class="section-subtitle">小程序体验，轻松赚赏金</text>
-      
-      <!-- 加载状态 -->
-      <view class="loading" v-if="loading">
-        <text>加载中..</text>
-      </view>
-      
-      <!-- 任务网格 -->
-      <view class="task-grid" v-else>
-        <view class="task-card" v-for="task in tasks" :key="task.id" @click="goToTaskDetail(task)">
-          <!-- 任务图片 -->
-          <view class="task-image-container" v-if="task.taskImage">
-            <image class="task-image" :src="task.taskImage" mode="aspectFill" />
-          </view>
-          
-          <view class="task-content">
-            <view class="task-header">
-              <image class="task-avatar" :src="task.avatar" />
-              <view class="task-meta">
-                <text class="task-title">{{ task.title }}</text>
-                <text class="task-type">{{ task.type }} | {{ task.platform }}</text>
-              </view>
-              <text v-if="task.isNew" class="new-badge">新</text>
+      <!-- 任务列表 -->
+      <view class="task-section">
+        <!-- <text class="section-title">任务推荐</text>
+        <text class="section-subtitle">小程序体验，轻松赚赏金</text> -->
+
+        <!-- 加载状态 -->
+        <view class="loading" v-if="loading">
+          <text>加载中..</text>
+        </view>
+
+        <!-- 任务网格 -->
+        <view class="task-grid" v-else>
+          <view class="task-card" v-for="task in tasks" :key="task.id" @click="goToTaskDetail(task)">
+            <!-- 任务图片 -->
+            <view class="task-image-container" v-if="task.taskImage">
+              <image class="task-image" :src="task.taskImage" mode="aspectFill" />
             </view>
-            
-            <view class="task-stats">
-              <view class="stat-row">
-                <text class="stat-label">已赚</text>
-                <text class="stat-label">平均用时</text>
-                <text class="stat-label">平均审核</text>
+
+            <view class="task-content">
+              <view class="task-header">
+                <image class="task-avatar" :src="task.avatar" />
+                <view class="task-meta">
+                  <text class="task-title">{{ task.title }}</text>
+                  <view class="task-type-container">
+                    <text class="task-type">{{ task.type }} </text>
+                  <text class="task-type">{{ task.platform }}</text>
+                  </view>
+                  
+                </view>
+                <text v-if="task.isNew" class="new-badge">新</text>
               </view>
-              <view class="stat-row">
-                <text class="stat-number">{{ task.participants }}人</text>
-                <text class="stat-number">{{ task.avgTime }}</text>
-                <text class="stat-number">{{ task.timeLimit }}</text>
+
+              <view class="task-stats">
+               
+                <view class="stat-row">
+                  <text class="stat-number"><text style="color: #EC3E0E;">{{ task.participants }}</text>人</text>
+                  <text class="stat-number">{{ task.avgTime }}</text>
+                  <text class="stat-number">{{ task.timeLimit }}</text>
+                </view>
+                 <view class="stat-row">
+                  <text class="stat-label">已赚</text>
+                  <text class="stat-label">平均用时</text>
+                  <text class="stat-label">平均审核</text>
+                </view>
               </view>
-            </view>
-            
-            <view class="task-footer">
-              <text class="reward-amount">{{ task.reward }}元</text>
+
+              <view class="task-footer">
+                <view class="reward-icon-container" :style="{ backgroundImage: `url(${$staticUrl('/static/coin.png')})` }">
+                </view>
+                <text class="reward-amount">{{ task.reward }}元</text>
+              </view>
             </view>
           </view>
         </view>
-      </view>
-      
-      <!-- 空状态 -->
-      <view class="empty-state" v-if="!loading && tasks.length === 0">
-        <text>暂无任务</text>
+
+        <!-- 空状态 -->
+        <view class="empty-state" v-if="!loading && tasks.length === 0">
+          <text>暂无任务</text>
+        </view>
       </view>
     </view>
   </view>
@@ -140,7 +164,7 @@ export default {
         sortBy: "default",
         sortOrder: "desc"
       },
-      
+
       // 排序选项
       sortOptions: [
         { label: "综合排序", value: "default" },
@@ -149,27 +173,27 @@ export default {
         { label: "参与人数", value: "current_participants" },
         { label: "截止时间", value: "deadline" }
       ],
-      
+
       // 排序方向选项
       sortOrderOptions: [
         { value: "desc", label: "降序" },
         { value: "asc", label: "升序" }
       ],
-      
+
 
     };
   },
-  
+
   onLoad() {
-        this.loadTasks()
-      },
-  
+    this.loadTasks()
+  },
+
   methods: {
     // 加载任务列表
     async loadTasks(params = {}) {
       try {
         this.loading = true
-        
+
         // 构建请求参数
         const requestParams = {
           page: this.filterParams.page,
@@ -178,19 +202,19 @@ export default {
           sortOrder: this.filterParams.sortOrder,
           ...params
         }
-        
+
         // 添加可选参数
         if (this.filterParams.title) requestParams.title = this.filterParams.title
         if (this.filterParams.status) requestParams.status = this.filterParams.status
         if (this.filterParams.minReward) requestParams.minReward = this.filterParams.minReward
         if (this.filterParams.maxReward) requestParams.maxReward = this.filterParams.maxReward
-        
+
         const response = await request({
           url: '/user/tasks',
           method: 'GET',
           data: requestParams
         })
-        
+
         if (response.data && response.data.records) {
           this.tasks = response.data.records.map(task => ({
             id: task.id,
@@ -225,7 +249,7 @@ export default {
         this.loading = false
       }
     },
-    
+
     // 标签点击事件（与首页逻辑一致）
     onTagClick(tag) {
       this.selectedTag = tag
@@ -235,7 +259,7 @@ export default {
         this.loadTasks({ title: tag })
       }
     },
-    
+
     // 搜索输入处理
     onSearchInput() {
       // 防抖处理
@@ -246,14 +270,14 @@ export default {
         this.loadTasks()
       }, 500)
     },
-    
+
     // 搜索任务
     searchTasks() {
       this.filterParams.title = this.searchKeyword
       this.filterParams.page = 1
       this.loadTasks()
     },
-    
+
     // 根据任务ID获取随机头像
     getRandomAvatar(taskId) {
       const avatars = ['/static/boy.png', '/static/girl.png']
@@ -261,12 +285,12 @@ export default {
       const index = taskId % avatars.length
       return avatars[index]
     },
-    
+
     // 根据任务ID获取随机任务图片
     getRandomTaskImage(taskId) {
       const taskImages = [
         '/static/task1.jpg',
-        '/static/task2.jpg', 
+        '/static/task2.jpg',
         '/static/task3.jpg',
         '/static/task4.jpg',
         '/static/task5.jpg'
@@ -275,12 +299,12 @@ export default {
       const index = taskId % taskImages.length
       return taskImages[index]
     },
-    
+
     // 跳转任务详情
     goToTaskDetail(task) {
       uni.navigateTo({ url: `/pages/task-detail/task-detail?id=${task.id}` });
     },
-    
+
     // 点击式筛选
     onFilterClick(sortType) {
       if (this.filterParams.sortBy === sortType) {
@@ -316,6 +340,18 @@ page {
 
 .search-section {
   padding: 20rpx 30rpx;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 20rpx;
+  padding-top: 150rpx;
+}
+
+.file-icon {
+  width: 55rpx;
+  height: 70rpx;
+  /* border-radius: 8rpx; */
+  background-size: cover;
 }
 
 .search-bar {
@@ -323,14 +359,17 @@ page {
   align-items: center;
   gap: 16rpx;
   background: #fff;
-  border-radius: 16rpx;
+  border-radius: 30rpx;
   padding: 16rpx 20rpx;
   box-shadow: 0 2rpx 8rpx rgba(0, 0, 0, 0.1);
+  width: calc(100% - 100rpx);
 }
 
 .search-icon {
-  font-size: 30rpx;
-  color: #666666;
+  width: 30rpx;
+  height: 30rpx;
+  background-size: cover;
+
 }
 
 .search-input {
@@ -342,14 +381,22 @@ page {
 }
 
 .filter-icon {
-  font-size: 20rpx;
+  width: 55rpx;
+  height: 70rpx;
+  /* border-radius: 8rpx; */
+  background-size: cover;
+}
+
+.filter-section-container {
+  background-color: #fff;
+  height: calc(100vh - 150rpx);
 }
 
 /* 标签筛选器样式（与首页一致） */
 .section-head {
-  margin: 0 30rpx 30rpx;
-  background: #fff;
-  border-radius: 16rpx;
+  /* margin: 0 30rpx 30rpx; */
+  /* background: #fff; */
+  /* border-radius: 16rpx; */
   padding: 28rpx;
 }
 
@@ -415,12 +462,12 @@ page {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
-  padding: 0 30rpx;
+  padding: 0 10rpx;
   margin-bottom: 40rpx;
 }
 
 .task-card {
-  width: calc(50% - 15rpx);
+  width: calc(50% - 10rpx);
   background: #fff;
   border-radius: 16rpx;
   overflow: hidden;
@@ -477,10 +524,17 @@ page {
   text-overflow: ellipsis;
   white-space: nowrap;
 }
-
+.task-type-container {
+  display: flex;
+  align-items: center;
+  gap: 8rpx;
+}
 .task-type {
   font-size: 20rpx;
-  color: #666666;
+  color: #3D3D3D;
+  background-color: #F1F1F1;
+  padding: 4rpx 8rpx;
+  border-radius: 8rpx;
 }
 
 .new-badge {
@@ -525,14 +579,25 @@ page {
 
 .task-footer {
   display: flex;
-  justify-content: flex-end;
+  justify-content: flex-start;
   align-items: center;
 }
+
+.reward-icon-container {
+  width: 40rpx;
+  height: 40rpx;
+  border-radius: 8rpx;
+  margin-right: 10rpx;
+  /* background-image: url('/static/coin.png'); */
+  background-size: 100% 100%;
+}
+
 
 .reward-amount {
   font-size: 28rpx;
   font-weight: bold;
-  color: #FFCE00;
+  color: #EC3E0E;
+
 }
 
 .empty-state {
@@ -593,9 +658,12 @@ page {
 }
 
 @keyframes bounce {
-  0%, 100% {
+
+  0%,
+  100% {
     transform: translateY(0);
   }
+
   50% {
     transform: translateY(-2rpx);
   }
@@ -632,5 +700,72 @@ page {
   border-radius: 2rpx;
   margin-bottom: 20rpx;
 }
-</style>
 
+section-head {
+  margin-bottom: 24rpx;
+}
+
+.section-title {
+  font-size: 32rpx;
+  font-weight: bold;
+  color: #333333;
+}
+
+.tags-scroll {
+  margin-top: 12rpx;
+  white-space: nowrap;
+  /* 隐藏滚动条 */
+  scrollbar-width: none;
+  /* Firefox */
+  -ms-overflow-style: none;
+  /* IE 10+ */
+}
+
+.tags-scroll::-webkit-scrollbar {
+  display: none;
+  /* Chrome Safari */
+}
+
+.tags {
+  display: inline-flex;
+  gap: 12rpx;
+  padding-right: 20rpx;
+}
+
+.tag {
+  background: none;
+  color: rgba(61, 61, 61, 0.8);
+  border-radius: 12rpx;
+  padding: 0 14rpx 0;
+  /* 去掉底部 padding，文字贴底 */
+  font-size: 30rpx;
+  white-space: nowrap;
+  flex-shrink: 0;
+  transition: all 0.3s ease;
+  line-height: 1;
+  /* 行高设为 1，确保文字紧贴底部 */
+}
+
+.tag.active {
+  background: none;
+  color: #3D3D3D;
+  font-size: 38rpx;
+  font-weight: bold;
+  /* 橙色虚线：位于文字下方 2rpx，长度 40rpx，居中 */
+  position: relative;
+}
+
+.tag.active::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 150rpx;
+  height: 15rpx;
+  border-radius: 999rpx;
+  background: linear-gradient(180deg, #FFD239 0%, #FF7B33 100%);
+  box-shadow: 0 8rpx 16rpx 0 #FDD63E;
+  filter: blur(10rpx);
+}
+</style>

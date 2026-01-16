@@ -2,7 +2,7 @@
   <view class="container">
     <view class="content">
       <!-- 钱包余额卡片 -->
-      <view class="wallet-card">
+      <view class="wallet-card" :style="{ backgroundImage: `url(${$staticUrl('/static/walletcard.png')})` }">
         <text class="wallet-title">钱包余额</text>
         <view class="balance-row">
           <view class="balance-main">
@@ -25,24 +25,18 @@
 
       <!-- 筛选条件 -->
       <view class="filter-section">
-        <view class="filter-item" 
-              :class="{ active: filterParams.type === '' }"
-              @click="setFilter('')">
+        <view class="filter-item" :class="{ active: filterParams.type === '' }" @click="setFilter('')">
           <text class="filter-text">全部</text>
         </view>
-        <view class="filter-item" 
-              :class="{ active: filterParams.type === 'TASK_REWARD' }"
-              @click="setFilter('TASK_REWARD')">
+        <view class="filter-item" :class="{ active: filterParams.type === 'TASK_REWARD' }"
+          @click="setFilter('TASK_REWARD')">
           <text class="filter-text">任务奖励</text>
         </view>
-        <view class="filter-item" 
-              :class="{ active: filterParams.type === 'INVITE_COMMISSION' }"
-              @click="setFilter('INVITE_COMMISSION')">
+        <view class="filter-item" :class="{ active: filterParams.type === 'INVITE_COMMISSION' }"
+          @click="setFilter('INVITE_COMMISSION')">
           <text class="filter-text">邀请佣金</text>
         </view>
-        <view class="filter-item" 
-              :class="{ active: filterParams.type === 'WITHDRAW' }"
-              @click="setFilter('WITHDRAW')">
+        <view class="filter-item" :class="{ active: filterParams.type === 'WITHDRAW' }" @click="setFilter('WITHDRAW')">
           <text class="filter-text">提现</text>
         </view>
       </view>
@@ -64,7 +58,7 @@
         <view class="empty-state" v-else>
           <text class="empty-text">暂无记录</text>
         </view>
-        
+
         <!-- 加载更多 -->
         <view class="load-more" v-if="hasMore" @click="loadMore">
           <text class="load-more-text">加载更多</text>
@@ -132,7 +126,7 @@ export default {
       withdrawAmount: '',
       selectedMethod: 'alipay', // 默认选择支付宝
       submitting: false, // 添加提交状态
-      
+
       // 收入统计数据
       incomeStats: {
         userId: null,
@@ -142,28 +136,28 @@ export default {
         currentBalance: 0,
         statisticsTime: ''
       },
-      
+
       // 余额变动记录
       balanceLogs: [],
-      
+
       // 筛选参数
       filterParams: {
         page: 1,
         size: 10,
         type: ''
       },
-      
+
       // 分页信息
       hasMore: true,
       loading: false
     }
   },
-  
+
   onLoad() {
     this.getIncomeStats()
     this.getBalanceLogs()
   },
-  
+
   methods: {
     // 获取收入统计
     async getIncomeStats() {
@@ -176,39 +170,39 @@ export default {
         console.error('获取收入统计失败:', error)
       }
     },
-    
+
     // 获取余额变动记录
     async getBalanceLogs(isLoadMore = false) {
       if (this.loading) return
-      
+
       try {
         this.loading = true
-        
+
         const params = {
           page: this.filterParams.page,
           size: this.filterParams.size
         }
-        
+
         if (this.filterParams.type) {
           params.type = this.filterParams.type
         }
-        
+
         const response = await get('/api/user/balance/logs', params)
-        
+
         if (response.code === 200) {
           const { records, total, current, size, pages, incomeStats } = response.data
-          
+
           if (isLoadMore) {
             this.balanceLogs = [...this.balanceLogs, ...records]
           } else {
             this.balanceLogs = records
           }
-          
+
           // 更新收入统计（如果返回了）
           if (incomeStats) {
             this.incomeStats = incomeStats
           }
-          
+
           // 判断是否还有更多数据
           this.hasMore = current < pages
         }
@@ -218,14 +212,14 @@ export default {
         this.loading = false
       }
     },
-    
+
     // 设置筛选条件
     setFilter(type) {
       this.filterParams.type = type
       this.filterParams.page = 1
       this.getBalanceLogs()
     },
-    
+
     // 加载更多
     loadMore() {
       if (this.hasMore && !this.loading) {
@@ -233,41 +227,41 @@ export default {
         this.getBalanceLogs(true)
       }
     },
-    
+
     // 格式化时间
     formatTime(timeStr) {
       if (!timeStr) return ''
       return timeStr.replace('T', ' ').split('.')[0]
     },
-    
+
     // 格式化金额
     formatAmount(amount, type) {
       const formattedAmount = parseFloat(amount).toFixed(2)
       return type === 'WITHDRAW' ? `-${formattedAmount}元` : `+${formattedAmount}元`
     },
-    
+
     // 获取金额样式类
     getAmountClass(type) {
       return type === 'WITHDRAW' ? 'expense' : 'income'
     },
-    
+
     goBack() {
       uni.navigateBack()
     },
     showWithdrawModal() {
       this.showModal = true
     },
-    
+
     hideWithdrawModal() {
       this.showModal = false
       this.withdrawAmount = ''
       this.submitting = false
     },
-    
+
     selectMethod(method) {
       this.selectedMethod = method
     },
-    
+
     // 验证提现金额
     validateWithdrawAmount() {
       if (!this.withdrawAmount) {
@@ -277,9 +271,9 @@ export default {
         })
         return false
       }
-      
+
       const amount = parseFloat(this.withdrawAmount)
-      
+
       if (isNaN(amount) || amount <= 0) {
         uni.showToast({
           title: '请输入有效的提现金额',
@@ -287,7 +281,7 @@ export default {
         })
         return false
       }
-      
+
       if (amount < 10) {
         uni.showToast({
           title: '提现金额不能少于10.00元',
@@ -295,7 +289,7 @@ export default {
         })
         return false
       }
-      
+
       const totalIncome = parseFloat(this.incomeStats.currentBalance || 0)
       if (amount > totalIncome) {
         uni.showToast({
@@ -304,32 +298,32 @@ export default {
         })
         return false
       }
-      
+
       return true
     },
-    
+
     // 确认提现
     async confirmWithdraw() {
       if (!this.validateWithdrawAmount()) {
         return
       }
-      
+
       if (this.submitting) {
         return
       }
-      
+
       try {
         this.submitting = true
-        
+
         const response = await post('/api/withdrawal/apply', {
           amount: parseFloat(this.withdrawAmount),
           accountType: this.selectedMethod
         })
-        
+
         if (response.success) {
           // 提现申请成功
           const data = response.data
-          
+
           uni.showModal({
             title: '提现申请成功',
             content: `提现金额：${data.amount}元\n手续费：${data.fee}元\n实际到账：${data.actualAmount}元\n预计到账时间：${data.estimatedArrivalTime}`,
@@ -368,7 +362,7 @@ export default {
 <style scoped>
 .container {
   min-height: 100%;
-  background-color: #f8f8f8;
+  background-color: white;
 }
 
 .nav-bar {
@@ -452,15 +446,23 @@ export default {
 }
 
 .wallet-card {
-  background: linear-gradient(135deg, #FFD700 0%, #FFA500 100%);
+  /* background: linear-gradient(135deg, #FFD700 0%, #FFA500 100%); */
   border-radius: 20rpx;
-  padding: 40rpx;
-  margin: 20rpx;
+  padding: 30rpx;
+  
+  margin: 0;
   position: relative;
+  /* background-size: cover; */
+  background-position: center;
+  background-repeat: no-repeat;
+  width: 100%;
+  box-sizing: border-box;
+  /* 背景放大 */
+  background-size: 120%;
 }
 
 .wallet-title {
-  font-size: 28rpx;
+  font-size: 38rpx;
   color: #333;
   font-weight: 500;
   display: block;
@@ -814,12 +816,13 @@ export default {
   color: #667eea;
   font-size: 28rpx;
 }
+
 .withdraw-btn {
   width: 200rpx;
   height: 60rpx;
-  background-color: #FFD700;
-  color: #333;
-  border: none;
+  /* background-color: #FFD700; */
+  color: #3D3D3D;
+  border: 1rpx solid #3D3D3D;
   border-radius: 30rpx;
   font-size: 24rpx;
   font-weight: bold;
@@ -846,4 +849,3 @@ export default {
   justify-content: center;
 }
 </style>
-
