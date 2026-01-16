@@ -1,5 +1,14 @@
 <template>
   <view class="container">
+    <view class="nav-bar">
+      <view class="status-bar"></view>
+      <view class="nav-content">
+        <view class="nav-left" @tap="goBack">
+          <text class="back-icon">‹</text>
+        </view>
+        <text class="nav-title">任务详情</text>
+      </view>
+    </view>
     <view class="content">
       <!-- 任务基本信息卡片 -->
       <view class="task-info-card">
@@ -13,10 +22,29 @@
           </view>
         </view>
 
-        <view class="task-meta">
+         <view class="task-stats">
+        <view class="stat-item">
+          <text class="stat-value">{{ taskInfo.avgTime || '5分钟' }}</text>
+          <text class="stat-label">人均用时</text>
+        </view>
+        <view class="stat-item">
+          <text class="stat-value">{{ taskInfo.avgReviewTime || '30+分钟' }}</text>
+          <text class="stat-label">平均审核</text>
+        </view>
+        <view class="stat-item">
+          <text class="stat-value">{{ taskInfo.participantCount }}单</text>
+          <text class="stat-label">已完成数</text>
+        </view>
+        <view class="stat-item">
+          <text class="stat-value">{{ taskInfo.timeLimit || '1小时' }}</text>
+          <text class="stat-label">做单限制</text>
+        </view>
+      </view>
+
+        <!-- <view class="task-meta">
           <text class="task-time">截止时间：{{ taskInfo.deadline }}</text>
           <text class="task-participants">参与人数：{{ taskInfo.participantCount }}/{{ taskInfo.maxParticipants }}</text>
-        </view>
+        </view> -->
 
         <view class="divider"></view>
 
@@ -354,7 +382,7 @@ export default {
 <style scoped>
 .container {
   min-height: 100vh;
-  background: #FFDD00;
+  background: linear-gradient(180deg, #FFDD00 -2%, #FFFFFF 50%);
   display: flex;
   flex-direction: column;
 }
@@ -441,6 +469,7 @@ export default {
   display: flex;
   flex-direction: column;
   gap: 20rpx;
+  margin-top: 80rpx;
 }
 
 /* 任务信息卡片 */
@@ -452,39 +481,45 @@ export default {
 }
 
 .task-header {
-  display: flex;
+  /* display: flex;
   justify-content: space-between;
   align-items: flex-start;
-  margin-bottom: 20rpx;
+  margin-bottom: 20rpx; */
 }
 
 .task-basic {
   flex: 1;
+  flex-direction: row;
+  display: flex;
+  justify-content: space-between;
 }
 
 .task-name {
-  font-size: 32rpx;
+  font-size: 52rpx;
   font-weight: bold;
   color: #333;
-  display: block;
+  display: inline-block;
   margin-bottom: 10rpx;
 }
 
 .task-price {
-  font-size: 32rpx;
+  font-size: 52rpx;
   font-weight: bold;
   color: #FF6B35;
-  display: block;
+  display: inline-block;
 }
 
 /* 状态标签 */
 .status-badge {
-  background-color: #FFD700;
-  color: #333;
-  padding: 4rpx 12rpx;
+  background: rgba(216, 216, 216, 0.3);
+  color: #3D3D3D;
+  width: fit-content;
+  display: inline-block;
+  padding: 4rpx 22rpx;
   border-radius: 20rpx;
   font-size: 20rpx;
   font-weight: bold;
+  margin-bottom: 40rpx;
 }
 
 .status-badge.completed {
@@ -793,7 +828,7 @@ export default {
 /* 底部按钮 */
 .bottom-button {
   padding: 30rpx;
-  background: #FFDD00;
+  /* background: #FFDD00; */
 }
 
 .submit-btn {
@@ -822,5 +857,77 @@ export default {
   display: flex;
   flex-direction: column;
   gap: 20rpx;
+}
+
+
+.task-stats {
+  display: flex;
+  justify-content: space-between;
+}
+
+.stat-item {
+  text-align: center;
+  flex: 1;
+}
+
+.stat-value {
+  display: block;
+  font-size: 28rpx;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 8rpx;
+}
+
+.stat-label {
+  display: block;
+  font-size: 24rpx;
+  color: #999;
+}
+
+
+.nav-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 2;
+  background: transparent;
+}
+
+.status-bar {
+  height: var(--status-bar-height, 44px);
+}
+
+.nav-content {
+  display: flex;
+  align-items: center;
+  height: 88rpx;
+  padding: 0 10rpx;
+  position: relative;
+}
+
+.nav-left {
+  width: 80rpx;
+  height: 80rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.back-icon {
+  font-size: 30rpx;
+  color: #333;
+  /* font-weight: bold; */
+  /* 放大 */
+  transform: scale(2);
+}
+
+.nav-title {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 32rpx;
+  font-weight: 600;
+  color: #333;
 }
 </style>

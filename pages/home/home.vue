@@ -72,8 +72,7 @@
               </view>
             </view>
            
-             <view class="reward-container">
-               <text class="task-icon" :style="{ backgroundImage: `url(${$staticUrl('/static/coin.png')})` }"></text>
+             <view class="reward-container">               <text class="task-icon" :style="{ backgroundImage: `url(${$staticUrl('/static/coin.png')})` }"></text>
                <text class="task-reward">{{ task.reward }}</text>
              </view>
             
