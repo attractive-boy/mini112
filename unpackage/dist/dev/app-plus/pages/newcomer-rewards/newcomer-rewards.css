@@ -1,0 +1,195 @@
+
+.container[data-v-9f2de9ba] {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #ffd700, #ffa500);
+  position: relative;
+}
+.bg-layer[data-v-9f2de9ba] {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  background-image: url('../../static/daybackg.png');
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  z-index: 0;
+}
+.content[data-v-9f2de9ba] {
+  padding: 0.625rem;
+  padding-top: calc(var(--status-bar-height, 44px) + 2.75rem);
+  position: relative;
+  z-index: 1;
+}
+.newcomer-banner[data-v-9f2de9ba] {
+  margin-bottom: 1.25rem;
+  padding: 0 0.625rem;
+}
+.banner-info[data-v-9f2de9ba] {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin-left: 0.625rem;
+}
+.banner-title[data-v-9f2de9ba] {
+  font-size: 2.5rem;
+  font-weight: bold;
+  color: #333;
+  display: block;
+  margin-bottom: 0.46875rem;
+  margin-left: 0.625rem;
+  color: #FB9700;
+}
+.banner-amount[data-v-9f2de9ba] {
+  font-size: 2.5rem;
+  font-weight: 1000;
+  color: #FF4800;
+  display: block;
+  margin-left: 0.9375rem;
+}
+.banner-amount-sub[data-v-9f2de9ba] {
+  font-size: 1.3125rem;
+  font-weight: bold;
+  color: #FF6200;
+  display: inline-block;
+}
+.task-section[data-v-9f2de9ba] {
+  margin-top: 60%;
+  background: white;
+  border-radius: 0.625rem;
+  padding: 0.9375rem;
+  margin-bottom: 1.25rem;
+}
+.task-item[data-v-9f2de9ba] {
+  display: flex;
+  align-items: center;
+  gap: 0.625rem;
+  margin-bottom: 0.9375rem;
+  padding-bottom: 0.9375rem;
+  border-bottom: 0.0625rem solid #f0f0f0;
+}
+.task-item[data-v-9f2de9ba]:last-child {
+  margin-bottom: 0;
+  padding-bottom: 0;
+  border-bottom: none;
+}
+.task-number[data-v-9f2de9ba] {
+  width: 1.5625rem;
+  height: 1.5625rem;
+  border-radius: 50%;
+  background: #FE9E01;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  color: #fff;
+  font-size: 0.75rem;
+}
+.task-info[data-v-9f2de9ba] {
+  flex: 1;
+}
+.task-title[data-v-9f2de9ba] {
+  font-size: 0.875rem;
+  font-weight: bold;
+  color: #333;
+  display: block;
+  margin-bottom: 0.25rem;
+}
+.task-amount[data-v-9f2de9ba] {
+  font-size: 0.75rem;
+  color: #E50000;
+}
+.task-desc[data-v-9f2de9ba] {
+  font-size: 0.75rem;
+  color: #666;
+}
+.task-reward[data-v-9f2de9ba] {
+  text-align: right;
+}
+.reward-btn[data-v-9f2de9ba] {
+  width: 3.125rem;
+  height: 1.25rem;
+  border-radius: 0.625rem;
+  opacity: 1;
+  font-size: 0.75rem;
+  font-weight: bold;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+.reward-btn.claim-reward[data-v-9f2de9ba] {
+  background-color: #4CAF50;
+}
+.reward-btn.pending[data-v-9f2de9ba] {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+.reward-btn.claimed[data-v-9f2de9ba] {
+  background-color: #ccc;
+}
+.daily-reward-btn[data-v-9f2de9ba] {
+  margin-top: 0.9375rem;
+  width: calc(100vw - 5.8125rem);
+  margin: 0 auto;
+  height: 2.5rem;
+  padding: 0 0.625rem;
+  background-color: #FFD833;
+  border-radius: 0.3125rem;
+  box-shadow: 0 0.0625rem 0.3125rem rgba(0,0,0,0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.daily-reward-btn-word[data-v-9f2de9ba] {
+  font-size: 1rem;
+  font-weight: bold;
+  color: #F02B01;
+}
+.loading[data-v-9f2de9ba] {
+  text-align: center;
+  padding: 1.25rem;
+  color: #666;
+  font-size: 0.875rem;
+}
+.nav-bar[data-v-9f2de9ba] {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 2;
+  background: transparent;
+}
+.status-bar[data-v-9f2de9ba] {
+  height: var(--status-bar-height, 44px);
+}
+.nav-content[data-v-9f2de9ba] {
+  display: flex;
+  align-items: center;
+  height: 2.75rem;
+  padding: 0 0.3125rem;
+  position: relative;
+}
+.nav-left[data-v-9f2de9ba] {
+  width: 2.5rem;
+  height: 2.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.back-icon[data-v-9f2de9ba] {
+  font-size: 0.9375rem;
+  color: #333;
+  /* font-weight: bold; */
+  /* 放大 */
+  transform: scale(2);
+}
+.nav-title[data-v-9f2de9ba] {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 1rem;
+  font-weight: 600;
+  color: #333;
+}

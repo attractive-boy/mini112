@@ -1,5 +1,5 @@
-// const DEFAULT_BASE = 'http://119.45.254.248:19000/task/'
-const DEFAULT_BASE = 'http://localhost:5173/static/'
+const DEFAULT_BASE = 'http://119.45.254.248:19000/task/'
+// const DEFAULT_BASE = 'http://localhost:5173/static/'
 
 const join = (base, path) => {
   if (!base) return path

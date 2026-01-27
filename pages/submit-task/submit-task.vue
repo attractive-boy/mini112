@@ -1,5 +1,15 @@
 <template>
   <view class="container">
+     <view class="nav-bar">
+      <view class="status-bar"></view>
+      <view class="nav-content">
+        <view class="nav-left" @tap="goBack">
+          <text class="back-icon">‹</text>
+        </view>
+        <text class="nav-title">提交任务</text>
+      </view>
+    </view>
+    <view class="content">
     <view class="task-card" v-if="taskInfo">
       <view class="task-header">
         <text class="task-name">{{ taskInfo.title }}</text>
@@ -14,21 +24,24 @@
           <text class="stat-value">{{ taskInfo.avgTime || '5分钟' }}</text>
           <text class="stat-label">人均用时</text>
         </view>
+        <view class="stat-divider"></view>
         <view class="stat-item">
           <text class="stat-value">{{ taskInfo.avgReviewTime || '30+分钟' }}</text>
           <text class="stat-label">平均审核</text>
         </view>
+        <view class="stat-divider"></view>
         <view class="stat-item">
           <text class="stat-value">{{ taskInfo.participantCount }}单</text>
           <text class="stat-label">已完成数</text>
         </view>
+        <view class="stat-divider"></view>
         <view class="stat-item">
           <text class="stat-value">{{ taskInfo.timeLimit || '1小时' }}</text>
           <text class="stat-label">做单限制</text>
         </view>
       </view>
     </view>
-    
+    <view class="divider"></view>
     <view class="upload-container">
       <view class="upload-box" @click="chooseImage">
         <view v-if="uploadedImages.length === 0" class="upload-placeholder">
@@ -47,6 +60,7 @@
       </view>
     </view>
     
+  <view class="shuoming">补充说明<text class="required">（选填）</text></view>
     <!-- 提交内容输入框 -->
     <view class="input-container">
       <textarea 
@@ -64,6 +78,7 @@
       <button class="submit-button" @click="submitTask" :disabled="!canSubmit">
         {{ loading ? '提交中...' : '提交审核' }}
       </button>
+    </view>
     </view>
   </view>
 </template>
@@ -280,24 +295,25 @@ export default {
 
 <style scoped>
 .container {
-  background: linear-gradient(to bottom, #FFD700 0%, #FFD700 280rpx, #ffffff 280rpx);
+  /* background: linear-gradient(to bottom, #FFD700 0%, #FFD700 280rpx, #ffffff 280rpx); */
+  background: linear-gradient(180deg, #FFDD00 -2%, #FFFFFF 50%);
   overflow: hidden;
 }
 
 /* 自定义导航栏 */
 .header {
-  background: #FFD700;
+  /* background: #FFD700; */
   padding-top: var(--status-bar-height, 44px);
 }
 
-.nav-bar {
+/* .nav-bar {
   height: 88rpx;
   display: flex;
   align-items: center;
   justify-content: space-between;
   padding: 0 30rpx;
   position: relative;
-}
+} */
 
 .nav-left {
   display: flex;
@@ -341,13 +357,19 @@ export default {
   background: #333;
 }
 
+.content {
+  background: white;
+  margin: 30rpx;
+  border-radius: 20rpx;
+}
+
 /* 任务卡片 */
 .task-card {
   margin: 30rpx;
   background: white;
   border-radius: 20rpx;
   padding: 40rpx;
-  box-shadow: 0 4rpx 20rpx rgba(0, 0, 0, 0.1);
+  /* box-shadow: 0 4rpx 20rpx rgba(0, 0, 0, 0.1); */
 }
 
 .task-header {
@@ -362,6 +384,55 @@ export default {
   font-weight: bold;
   color: #333;
 }
+
+
+/* 导航栏样式 */
+.nav-bar {
+  background: #FFDD00;
+}
+
+.status-bar {
+  height: var(--status-bar-height, 44px);
+}
+
+.nav-content {
+  display: flex;
+  align-items: center;
+  height: 88rpx;
+  padding: 0 10rpx;
+  position: relative;
+}
+
+.nav-left {
+  width: 80rpx;
+  height: 80rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.back-icon {
+  font-size: 40rpx;
+  color: #333;
+  font-weight: bold;
+}
+
+.nav-title {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 32rpx;
+  font-weight: 600;
+  color: #333;
+}
+
+.nav-right {
+  display: flex;
+  align-items: center;
+  gap: 20rpx;
+  margin-left: auto;
+}
+
 
 .task-reward {
   font-size: 60rpx;
@@ -401,6 +472,11 @@ export default {
   text-align: center;
   flex: 1;
 }
+.stat-divider {
+  width: 1px;
+  height: 80rpx;
+  background: #d9d9d9;
+}
 
 .stat-value {
   display: block;
@@ -415,19 +491,25 @@ export default {
   font-size: 24rpx;
   color: #999;
 }
+.divider {
+  height: 2rpx;
+  background-color: #e5e5e5;
+  margin: 20rpx 20rpx 20rpx 20rpx;
+}
 
 .upload-container {
   margin: 0 30rpx 30rpx 30rpx;
 }
 
 .upload-box {
-  background: white;
+  /* background: white; */
+  background: rgba(216, 216, 216, 0.2);
   border-radius: 16rpx;
   min-height: 400rpx;
   display: flex;
   align-items: center;
   justify-content: center;
-  border: 4rpx dashed #d9d9d9;
+  /* border: 4rpx dashed #d9d9d9; */
 }
 
 .upload-placeholder {
@@ -507,6 +589,17 @@ export default {
   margin: 0 30rpx 30rpx 30rpx;
   position: relative;
 }
+.shuoming {
+  margin-left: 30rpx;
+  font-size: 38rpx;
+  font-weight: bold;
+  color: #3D3D3D;
+  margin-bottom: 20rpx;
+}
+.required {
+  /* color: #FF4D4F; */
+  font-size: 28rpx;
+}
 
 .input-field {
   background: white;
@@ -518,12 +611,13 @@ export default {
 }
 
 .textarea-field {
-  background: white;
+  /* background: white; */
+  background: rgba(216, 216, 216, 0.2);
   border-radius: 16rpx;
   padding: 30rpx;
   font-size: 28rpx;
   border: none;
-  box-shadow: 0 2rpx 10rpx rgba(0, 0, 0, 0.05);
+  /* box-shadow: 0 2rpx 10rpx rgba(0, 0, 0, 0.05); */
   min-height: 200rpx;
   width: 100%;
   box-sizing: border-box;
@@ -553,6 +647,7 @@ export default {
   align-items: center;
   justify-content: center;
   border-radius: 10px;
+  margin: 0 40rpx;
 }
 
 .submit-button:disabled {

@@ -1,0 +1,111 @@
+
+.container[data-v-e3c794bd] {
+  height: calc(100vh - var(--nav-bar-height));
+  background: linear-gradient(180deg, #FFDD00 -2%, #FFFFFF 50%);
+}
+
+/* 导航栏样式 */
+.nav-bar[data-v-e3c794bd] {
+  z-index: 100;
+  background: #FFDD00;
+}
+.status-bar[data-v-e3c794bd] {
+  height: var(--status-bar-height, 44px);
+}
+.nav-content[data-v-e3c794bd] {
+  display: flex;
+  align-items: center;
+  height: 2.75rem;
+  padding: 0 0.3125rem;
+  position: relative;
+}
+.nav-left[data-v-e3c794bd] {
+  width: 2.5rem;
+  height: 2.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.back-icon[data-v-e3c794bd] {
+  font-size: 1.25rem;
+  color: #333;
+  font-weight: bold;
+}
+.nav-title[data-v-e3c794bd] {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 1rem;
+  font-weight: 600;
+  color: #333;
+}
+.nav-right[data-v-e3c794bd] {
+  display: flex;
+  align-items: center;
+  gap: 0.625rem;
+  margin-left: auto;
+}
+.content[data-v-e3c794bd] {
+  height: 80%;
+  z-index: 100;
+  margin-top: 9.375rem;
+  padding: 1.875rem 1.25rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-top-left-radius: 85px;
+  border-top-right-radius: 85px;
+  box-sizing: border-box;
+  background: white;
+  /* border-radius: 55px; */
+  transform: translateY(-5%);
+}
+.success-icon[data-v-e3c794bd] {
+  height: 184px;
+  width: 184px;
+  margin-bottom: 1.25rem;
+  background-size: cover;
+  background-position: center;
+}
+.back-hall-btn[data-v-e3c794bd] {
+  width: calc(100% - 7.8125rem);
+  background-color: var(--brand-primary) !important;
+  color: #3D3D3D !important;
+  border: none !important;
+  border-radius: var(--radius-lg);
+  font-size: 1.1875rem;
+  font-weight: bold;
+  transform: translateY(143px);
+  line-height: 1.4;
+  text-align: center;
+  padding: 0.625rem 0;
+  margin: 0 1.25rem;
+}
+.back-hall-btn[data-v-e3c794bd]::after {
+  border: none;
+}
+.continue-btn[data-v-e3c794bd] {
+  width: 9.375rem;
+  height: 2.5rem;
+  background-color: #FFD700;
+  color: #333;
+  border: none;
+  border-radius: 1.25rem;
+  font-size: 0.875rem;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.back-btn[data-v-e3c794bd] {
+  width: 6.25rem;
+  height: 1.875rem;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  border-radius: 0.9375rem;
+  font-size: 0.75rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

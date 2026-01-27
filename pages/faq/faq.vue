@@ -1,5 +1,14 @@
 <template>
   <view class="container">
+    <view class="nav-bar">
+      <view class="status-bar"></view>
+      <view class="nav-content">
+        <view class="nav-left" @tap="goBack">
+          <text class="back-icon">‹</text>
+        </view>
+        <text class="nav-title">常见问题解答</text>
+      </view>
+    </view>
     <view class="content">
       <!-- 常见问题列表 -->
       <view class="faq-section" v-if="!loading && list.length > 0">
@@ -91,15 +100,63 @@ export default {
 <style scoped>
 .container {
   min-height: 100vh;
-  background: linear-gradient(to bottom, #FFDD00, #ffffff);
+  background: linear-gradient(180deg, #FFDD00 12%, #FFFFFF 55%);
   display: flex;
   flex-direction: column;
+}
+
+
+.nav-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 2;
+  background: transparent;
+}
+
+.status-bar {
+  height: var(--status-bar-height, 44px);
+}
+
+.nav-content {
+  display: flex;
+  align-items: center;
+  height: 88rpx;
+  padding: 0 10rpx;
+  position: relative;
+}
+
+.nav-left {
+  width: 80rpx;
+  height: 80rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.back-icon {
+  font-size: 30rpx;
+  color: #333;
+  /* font-weight: bold; */
+  /* 放大 */
+  transform: scale(2);
+}
+
+.nav-title {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 32rpx;
+  font-weight: 600;
+  color: #333;
 }
 
 .content {
   padding: 30rpx;
   flex: 1;
   overflow-y: auto;
+  margin-top: 88rpx;
 }
 
 .faq-section {
@@ -155,7 +212,7 @@ export default {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  box-shadow: 0 2rpx 10rpx rgba(0,0,0,0.05);
+  /* box-shadow: 0 2rpx 10rpx rgba(0,0,0,0.05); */
   position: relative;
   overflow: visible;
 }
@@ -165,11 +222,13 @@ export default {
   height: 80rpx;
   margin-right: 20rpx;
   flex-shrink: 0;
+  transform: scale(2);
 }
 
 .service-left {
   flex: 1;
   padding-right: 20rpx;
+  margin-left: 20rpx;
 }
 
 .service-title {
@@ -185,6 +244,9 @@ export default {
   color: #666;
   line-height: 1.4;
   display: block;
+  /* no-wrap; */
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .service-right {
@@ -194,10 +256,14 @@ export default {
 }
 
 .qr-code {
-  width: 100%;
-  height: 100%;
+  width: 30vw;
+  height: 30vw;
   border-radius: 10rpx;
   box-shadow: 0 4rpx 12rpx rgba(0,0,0,0.1);
   background: #fff;
+  position: absolute;
+  top: -20%;
+  right: 30rpx;
+  transform: translateY(-50%);
 }
 </style>

@@ -22,24 +22,27 @@
           </view>
         </view>
 
-         <view class="task-stats">
-        <view class="stat-item">
-          <text class="stat-value">{{ taskInfo.avgTime || '5分钟' }}</text>
-          <text class="stat-label">人均用时</text>
+        <view class="task-stats">
+          <view class="stat-item">
+            <text class="stat-value">{{ taskInfo.avgTime || '5分钟' }}</text>
+            <text class="stat-label">人均用时</text>
+          </view>
+          <view class="stat-divider"></view>
+          <view class="stat-item">
+            <text class="stat-value">{{ taskInfo.avgReviewTime || '30+分钟' }}</text>
+            <text class="stat-label">平均审核</text>
+          </view>
+          <view class="stat-divider"></view>
+          <view class="stat-item">
+            <text class="stat-value">{{ taskInfo.participantCount }}单</text>
+            <text class="stat-label">已完成数</text>
+          </view>
+          <view class="stat-divider"></view>
+          <view class="stat-item">
+            <text class="stat-value">{{ taskInfo.timeLimit || '1小时' }}</text>
+            <text class="stat-label">做单限制</text>
+          </view>
         </view>
-        <view class="stat-item">
-          <text class="stat-value">{{ taskInfo.avgReviewTime || '30+分钟' }}</text>
-          <text class="stat-label">平均审核</text>
-        </view>
-        <view class="stat-item">
-          <text class="stat-value">{{ taskInfo.participantCount }}单</text>
-          <text class="stat-label">已完成数</text>
-        </view>
-        <view class="stat-item">
-          <text class="stat-value">{{ taskInfo.timeLimit || '1小时' }}</text>
-          <text class="stat-label">做单限制</text>
-        </view>
-      </view>
 
         <!-- <view class="task-meta">
           <text class="task-time">截止时间：{{ taskInfo.deadline }}</text>
@@ -61,14 +64,9 @@
         <view v-if="taskInfo.images && taskInfo.images.length > 0" class="task-images">
           <text class="desc-title">任务图片：</text>
           <view class="images-grid">
-            <image 
-              v-for="(image, index) in taskInfo.images" 
-              :key="index" 
-              :src="getImageUrl(image)" 
-              mode="aspectFill"
-              class="task-image" 
-              @tap="previewImage(getImageUrl(image), taskInfo.images.map(img => getImageUrl(img)))" 
-            />
+            <image v-for="(image, index) in taskInfo.images" :key="index" :src="getImageUrl(image)" mode="aspectFill"
+              class="task-image"
+              @tap="previewImage(getImageUrl(image), taskInfo.images.map(img => getImageUrl(img)))" />
           </view>
         </view>
 
@@ -97,28 +95,23 @@
             <text class="info-item">审核时间：{{ submissionDetail.reviewTime || '未审核' }}</text>
             <text class="info-item">状态：{{ submissionDetail.statusDescription || '待处理' }}</text>
           </view>
-          
+
           <!-- 提交内容 -->
           <view v-if="submissionDetail.submissionContent" class="submission-content">
             <text class="desc-title">提交内容：</text>
             <text class="desc-text">{{ submissionDetail.submissionContent }}</text>
           </view>
-          
+
           <!-- 提交图片 -->
           <view v-if="submissionDetail.submissionImages" class="submission-images">
             <text class="desc-title">提交图片：</text>
             <view class="images-grid">
-              <image 
-                v-for="(image, index) in getSubmissionImages()" 
-                :key="index" 
-                :src="getImageUrl(image)" 
-                mode="aspectFill"
-                class="submitted-image" 
-                @tap="previewImage(getImageUrl(image), getSubmissionImages().map(img => getImageUrl(img)))" 
-              />
+              <image v-for="(image, index) in getSubmissionImages()" :key="index" :src="getImageUrl(image)"
+                mode="aspectFill" class="submitted-image"
+                @tap="previewImage(getImageUrl(image), getSubmissionImages().map(img => getImageUrl(img)))" />
             </view>
           </view>
-          
+
           <!-- 审核意见 -->
           <view v-if="submissionDetail.reviewComment" class="review-comment">
             <text class="desc-title">审核意见：</text>
@@ -134,7 +127,7 @@
         <text class="btn-text">参与任务</text>
       </view>
     </view>
-    
+
     <view v-else-if="isParticipated && (!submissionDetail || !submissionDetail.submitTime)" class="bottom-button">
       <view class="submit-btn" @tap="submitTask">
         <text class="btn-text">提交任务</text>
@@ -144,7 +137,7 @@
 </template>
 
 <script>
-import { request , BASE_URL} from '@/utils/request'
+import { request, BASE_URL } from '@/utils/request'
 
 
 export default {
@@ -197,16 +190,16 @@ export default {
     async loadTaskDetail(id) {
       try {
         this.loading = true
-        
+
         // 获取任务详情
         const taskResponse = await request({
           url: `/user/tasks/${id}`,
           method: 'GET'
         })
-        
+
         if (taskResponse.success) {
           const { taskInfo, adminInfo, isParticipated, participantStatus, participatedAt, submitTime, reviewTime, reviewNote } = taskResponse.data
-          
+
           this.taskInfo = taskInfo
           this.adminInfo = adminInfo
           this.isParticipated = isParticipated
@@ -215,7 +208,7 @@ export default {
           this.submitTime = submitTime
           this.reviewTime = reviewTime
           this.reviewNote = reviewNote
-          
+
           // 处理图片数组
           if (taskInfo.images) {
             try {
@@ -224,7 +217,7 @@ export default {
               this.taskInfo.images = []
             }
           }
-          
+
           // 检查用户参与状态
           await this.checkParticipationStatus(id)
         }
@@ -238,17 +231,17 @@ export default {
         this.loading = false
       }
     },
-    
+
     async checkParticipationStatus(taskId) {
       try {
         const response = await request({
           url: `/user/tasks/${taskId}/participated`,
           method: 'GET'
         })
-        
+
         if (response.success) {
           this.isParticipated = response.data
-          
+
           // 如果用户已参与，获取提交详情
           if (response.data) {
             await this.getSubmissionDetail(taskId)
@@ -258,14 +251,14 @@ export default {
         console.error('检查参与状态失败:', error)
       }
     },
-    
+
     async getSubmissionDetail(taskId) {
       try {
         const response = await request({
           url: `/user/tasks/${taskId}/submission-detail`,
           method: 'GET'
         })
-        
+
         if (response.success) {
           this.submissionDetail = response.data
         }
@@ -273,7 +266,7 @@ export default {
         console.error('获取提交详情失败:', error)
       }
     },
-    
+
     getImageUrl(imagePath) {
       if (!imagePath) return ''
       // 使用BASE_URL + /api/file/proxy/ + 图片路径的格式
@@ -325,21 +318,21 @@ export default {
               uni.showLoading({
                 title: '参与中...'
               })
-              
+
               // 调用参与任务的API
               const response = await request({
                 url: `/user/tasks/${this.taskId}/accept`,
                 method: 'POST'
               })
-              
+
               uni.hideLoading()
-              
+
               if (response.code === 200 && response.data?.success) {
                 uni.showToast({
                   title: '任务接取成功',
                   icon: 'success'
                 })
-                
+
                 // 参与成功后跳转到提交任务页面
                 setTimeout(() => {
                   uni.navigateTo({
@@ -663,9 +656,9 @@ export default {
 .task-description {}
 
 .desc-title {
-  font-size: 28rpx;
+  font-size: 38rpx;
   font-weight: bold;
-  color: #333;
+  color: #E27C00;
   display: block;
   margin-bottom: 15rpx;
 }
@@ -883,6 +876,13 @@ export default {
   font-size: 24rpx;
   color: #999;
 }
+
+.stat-divider {
+  height: 80rpx;
+  width: 2rpx;
+  background: #f0f0f0;
+}
+
 
 
 .nav-bar {

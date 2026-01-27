@@ -1,25 +1,25 @@
 <template>
-  <view class="container">
+  <view class="container" :style="{ backgroundImage: 'url(' + $staticUrl('/static/绑定账号管理.png') + ')' }">
     <view class="content">
       <!-- 主要内容区 -->
       <view class="hero-section">
         <!-- 插图 -->
-        <view class="illustration">
+        <!-- <view class="illustration">
           <image class="hero-image" :src="$staticUrl('/static/456270fd-9af0-4ed7-810c-cf2d69b75bc7@1x.png')" mode="aspectFit" />
-        </view>
+        </view> -->
         <view>
           <!-- 标题文案 -->
-          <view class="title-section">
+          <!-- <view class="title-section">
             <text class="main-title">账号绑定更<text class="highlight">安全</text>，</text>
             <text class="sub-title">提现更<text class="highlight">高效</text>！</text>
-          </view>
+          </view> -->
 
           <!-- 描述文案 -->
-          <view class="description">
+          <!-- <view class="description">
             <text class="desc-text">
               绑定微信或支付宝账号，即可快速完成收益提现，确保资金安全，操作便捷。
             </text>
-          </view>
+          </view> -->
         </view>
       </view>
 
@@ -28,7 +28,7 @@
         <!-- 支付宝 -->
         <view class="account-option" @tap="bindAccount('alipay')">
           <view class="option-left">
-            <view class="option-icon alipay-icon">支</view>
+            <view class="option-icon alipay-icon" :style="{ backgroundImage: 'url(' + $staticUrl('/static/zhi.png') + ')' }"></view>
             <view class="option-info">
               <text class="option-title">支付宝账号</text>
               <text v-if="userInfo.hasAlipay" class="bound-account">{{ userInfo.alipayAccount }}</text>
@@ -42,7 +42,7 @@
         <!-- 微信 -->
         <view class="account-option" @tap="bindAccount('wechat')">
           <view class="option-left">
-            <view class="option-icon wechat-icon">微</view>
+            <view class="option-icon wechat-icon" :style="{ backgroundImage: 'url(' + $staticUrl('/static/we.png') + ')' }"></view>
             <view class="option-info">
               <text class="option-title">微信账号</text>
               <text v-if="userInfo.hasWechat" class="bound-account">{{ userInfo.wechatAccount }}</text>
@@ -57,7 +57,10 @@
       <!-- 底部提示 -->
       <view class="footer-note">
         <text class="note-text">
-          如需要提现，请先绑定支付宝或者微信后进行提现。
+          如需更换绑定，请先解除当前账号后重新绑定。
+        </text>
+        <text class="note-text">
+          绑定信息仅用于收益提现，不会对您的账户造成其他影响。
         </text>
       </view>
     </view>
@@ -301,9 +304,12 @@ export default {
 <style scoped>
 .container {
   min-height: 100vh;
-  background: #f5f5f7;
+  background: #fff;
   display: flex;
   flex-direction: column;
+  background-position: center -150rpx;
+  background-size: cover;
+  /* background-position: -100rpx ; */
 }
 
 .nav-right-icons {
@@ -330,11 +336,12 @@ export default {
 
 .hero-section {
   display: flex;
-  background: white;
+  /* background: white; */
   border-radius: 20rpx;
   padding: 60rpx 40rpx 40rpx 40rpx;
   margin: 20rpx 0;
   text-align: center;
+  height: 500rpx;
 }
 
 .illustration {
@@ -421,11 +428,16 @@ export default {
 }
 
 .alipay-icon {
-  background: #1677FF;
+  /* background: #1677FF; */
+  background-position: center;
+  background-size: cover;
+  
 }
 
 .wechat-icon {
-  background: #07C160;
+  /* background: #07C160; */
+  background-position: center;
+  background-size: cover;
 }
 
 .option-title {
@@ -435,15 +447,16 @@ export default {
 }
 
 .bind-btn {
-  width: 200rpx;
+  /* width: 200rpx; */
   height: 60rpx;
-  background-color: #FFD700;
-  color: #333;
+  background-color: #FEBA03;
+  color: #fff;
   border: none;
-  border-radius: 30rpx;
+  border-radius: 10rpx;
   font-size: 24rpx;
   font-weight: bold;
   display: flex;
+  padding: 0rpx 20rpx;
   align-items: center;
   justify-content: center;
 }
@@ -482,12 +495,14 @@ export default {
 }
 
 .footer-note {
-  padding: 0 20rpx;
+  padding: 0 40rpx;
 }
 
 .note-text {
-  font-size: 24rpx;
+  font-size: 20rpx;
   color: #999;
+  width: 100%;
+  display: block;
   line-height: 1.6;
   text-align: center;
 }

@@ -1,12 +1,21 @@
 <template>
   <view class="container">
+    <view class="nav-bar">
+      <view class="status-bar"></view>
+      <view class="nav-content">
+        <view class="nav-left" @tap="goBack">
+          <text class="back-icon">‹</text>
+        </view>
+        <text class="nav-title">编辑信息</text>
+      </view>
+    </view>
     <view class="content">
       <view class="avatar-section">
-        <text class="section-title">更换头像</text>
+        <!-- <text class="section-title">更换头像</text> -->
         <view class="avatar-upload" @click="uploadAvatar">
           <image class="avatar" :src="getAvatarUrl(userInfo.avatar)" />
           <view class="upload-overlay">
-            <text class="upload-text">点击更换</text>
+            <text class="upload-text">更换头像</text>
           </view>
         </view>
       </view>
@@ -15,6 +24,9 @@
           <text class="form-label">昵称</text>
           <input class="form-input" v-model="userInfo.nickname" placeholder="请输入昵称" maxlength="20" />
         </view>
+        <view class="text-hint">2-16个字符，支持中英文、数字</view>
+
+        <view style="height: 40vh"></view>
         <button class="save-btn" @click="saveInfo">点击保存</button>
       </view>
     </view>
@@ -201,13 +213,63 @@ export default {
 <style scoped>
 .container {
   min-height: 100vh;
-  background: #f5f5f5;
+  background: linear-gradient(180deg, #FFDD00 12%, #FFFFFF 55%);
 }
 
+
+/* 导航栏样式 */
+.nav-bar {
+  background: #FFDD00;
+}
+
+.status-bar {
+  height: var(--status-bar-height, 44px);
+}
+
+.nav-content {
+  display: flex;
+  align-items: center;
+  height: 88rpx;
+  padding: 0 10rpx;
+  position: relative;
+}
+
+.nav-left {
+  width: 80rpx;
+  height: 80rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.back-icon {
+  font-size: 40rpx;
+  color: #333;
+  font-weight: bold;
+}
+
+.nav-title {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 32rpx;
+  font-weight: 600;
+  color: #333;
+}
+
+.nav-right {
+  display: flex;
+  align-items: center;
+  gap: 20rpx;
+  margin-left: auto;
+}
 
 
 .content {
   padding: 30rpx;
+  background: white;
+  border-radius: 20rpx;
+  margin: 30rpx;
 }
 
 .avatar-section {
@@ -215,7 +277,8 @@ export default {
   border-radius: 20rpx;
   padding: 40rpx;
   text-align: center;
-  margin-bottom: 30rpx;
+  /* margin-bottom: 30rpx; */
+  padding-bottom: 0rpx;
 }
 
 .section-title {
@@ -249,11 +312,16 @@ export default {
   background: white;
   border-radius: 20rpx;
   padding: 30rpx;
+  padding-top: 0rpx;
 }
 
 .form-group {
-  margin-bottom: 40rpx;
+  margin-bottom: 10rpx;
   position: relative;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
 }
 
 .form-label {
@@ -269,7 +337,19 @@ export default {
   border: 2rpx solid #e0e0e0;
   border-radius: 15rpx;
   font-size: 28rpx;
+  width: 60%;
+  padding-top: 10rpx;
+  padding-bottom: 10rpx;
   background: #f8f8f8;
+}
+.text-hint {
+  font-size: 20rpx;
+  color: #999;
+  display: block;
+  margin-top: 5rpx;
+  margin-right: 0;
+  width: 60%;
+  margin-left: calc(40% - 50rpx);
 }
 
 .form-input:disabled {

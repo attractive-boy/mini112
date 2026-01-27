@@ -1,0 +1,188 @@
+
+.container[data-v-bac4a35d] {
+  background-color: #fff8d8;
+  background-image: linear-gradient(180deg, #FFE979, #FFE979);
+  min-height: 100vh;
+}
+.content[data-v-bac4a35d] {
+  background-color: rgba(255, 255, 255, 1);
+  border-radius: 0.9375rem;
+  padding: 1.5625rem 1.875rem 1.25rem 1.875rem;
+  box-shadow: 0 -0.375rem 0.9375rem rgba(0, 0, 0, 0.05);
+  min-height: 43.75rem;
+  transform: translateY(10%);
+}
+.header[data-v-bac4a35d] {
+  /* text-align: center; */
+  margin-bottom: 1.25rem;
+}
+.title[data-v-bac4a35d] {
+  font-size: 1.375rem;
+  font-weight: bold;
+  color: #3D3D3D;
+  margin-bottom: 0.375rem;
+  display: block;
+}
+.subtitle[data-v-bac4a35d] {
+  font-size: 0.875rem;
+  color: #3D3D3D;
+}
+.tab-container[data-v-bac4a35d] {
+  display: flex;
+  justify-content: center;
+  gap: 7.8125rem;
+  margin-bottom: 1.25rem;
+}
+.tab-item[data-v-bac4a35d] {
+  position: relative;
+  padding-bottom: 0.375rem;
+}
+.tab-text[data-v-bac4a35d] {
+  font-size: 1rem;
+  color: #3D3D3D;
+}
+.tab-item.active .tab-text[data-v-bac4a35d] {
+  color: #3D3D3D;
+  font-weight: bold;
+}
+.tab-underline[data-v-bac4a35d] {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%) translateY(-100%);
+  width: 3.125rem;
+  z-index: 1;
+  height: 0.3125rem;
+  /* 梯形：上宽下窄 */
+  -webkit-clip-path: polygon(10% 0%, 90% 0%, 100% 100%, 0% 100%);
+          clip-path: polygon(10% 0%, 90% 0%, 100% 100%, 0% 100%);
+  background-color: #FFCE00;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+.tab-item.active .tab-underline[data-v-bac4a35d] {
+  opacity: 1;
+}
+.form-group[data-v-bac4a35d] {
+  margin-bottom: 0.875rem;
+}
+.label[data-v-bac4a35d] {
+  font-size: 0.8125rem;
+  color: #3D3D3D;
+  margin-bottom: 0.375rem;
+  display: block;
+}
+.input-wrapper[data-v-bac4a35d] {
+  position: relative;
+  display: flex;
+  align-items: center;
+  padding: 0.625rem 0.75rem;
+  border-radius: 0.625rem;
+  border: 0.0625rem solid rgba(0, 0, 0, 0.08);
+  background-color: #fff;
+  box-shadow: 0 0.25rem 0.5625rem rgba(255, 206, 0, 0.2);
+}
+.input-icon[data-v-bac4a35d] {
+  /* font-size: 28rpx; */
+  margin-right: 0.5rem;
+  flex-shrink: 0;
+  background-image: url("../../static/phone.png");
+  width: 0.9375rem;
+  height: 0.9375rem;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+.input-icon.no-bg[data-v-bac4a35d] {
+  font-size: 0.875rem;
+  background-image: none;
+  text-align: center;
+  width: unset;
+  height: unset;
+}
+.input-icon.lock[data-v-bac4a35d] {
+  background-image: url("../../static/lock.png");
+}
+.input[data-v-bac4a35d] {
+  flex: 1;
+  font-size: 0.8125rem;
+  border: none;
+  background-color: transparent;
+  color: #3D3D3D;
+  min-width: 0;
+}
+.verify-btn[data-v-bac4a35d] {
+  border-radius: 0.9375rem;
+  background-color: #FFCE00;
+  color: #3D3D3D;
+  font-size: 0.75rem;
+  height: 1.875rem;
+  padding: 0 0.625rem;
+  line-height: 1.875rem;
+  border: none;
+  white-space: nowrap;
+  flex-shrink: 0;
+  transition: all 0.3s ease;
+}
+.verify-btn[data-v-bac4a35d]:active {
+  transform: scale(0.98);
+}
+.verify-btn[data-v-bac4a35d]:disabled {
+  background-color: #ccc !important;
+  color: #999 !important;
+}
+.agreement-wrapper[data-v-bac4a35d] {
+  display: flex;
+  height: 2.5rem;
+  align-items: center;
+  margin-bottom: 1.25rem;
+}
+.agreement-checkbox[data-v-bac4a35d] {
+  margin-right: 0.3125rem;
+}
+/* 深度作用选择器，确保 uni-checkbox 内部元素样式生效 */
+.agreement-checkbox[data-v-bac4a35d] .uni-checkbox-input {
+  width: 0.9375rem;
+  height: 0.9375rem;
+  border-radius: 50%;
+}
+.agreement-checkbox[data-v-bac4a35d] svg {
+  width: 0.78125rem;
+  height: 0.78125rem;
+}
+.agreement-text-only[data-v-bac4a35d] {
+  text-align: left;
+  margin: 1.25rem 0;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+}
+.agreement-text[data-v-bac4a35d] {
+  font-size: 0.75rem;
+  color: rgba(61, 61, 61, 0.5);
+}
+.agreement-link[data-v-bac4a35d] {
+  font-size: 0.75rem;
+  color: rgba(61, 61, 61, 0.8);
+  text-decoration: underline;
+}
+.primary-btn[data-v-bac4a35d] {
+  border-radius: 1.375rem;
+  height: 2.75rem;
+  line-height: 2.75rem;
+  background-color: #FFCE00;
+  color: #3D3D3D;
+  border: none;
+  width: 100%;
+  font-size: 1rem;
+  font-weight: bold;
+  transition: all 0.3s ease;
+}
+.primary-btn[data-v-bac4a35d]:active {
+  transform: scale(0.98);
+}
+.primary-btn[data-v-bac4a35d]:disabled {
+  background-color: #ccc !important;
+  color: #999 !important;
+}

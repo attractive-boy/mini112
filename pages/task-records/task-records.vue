@@ -1,5 +1,14 @@
 <template>
   <view class="container">
+    <view class="nav-bar">
+      <view class="status-bar"></view>
+      <view class="nav-content">
+        <view class="nav-left" @tap="goBack">
+          <text class="back-icon">‹</text>
+        </view>
+        <text class="nav-title">编辑信息</text>
+      </view>
+    </view>
     <view class="content">
       <!-- 状态筛选 -->
       <view class="filter-tabs">
@@ -19,22 +28,28 @@
               <view class="task-header">
                 <text class="task-name">{{ task.taskTitle }}</text>
                 <text class="task-amount">+¥{{ task.taskReward }}</text>
+                <view class="task-status-badge" :class="getStatusClass(task.participantStatus)"
+                  @tap="handleTaskAction(task)">
+                  <text class="status-text">{{ getStatusText(task.participantStatus) }}</text>
+                </view>
               </view>
-              <text class="task-desc">{{ task.statusDescription }}</text>
-              <text class="task-time">{{ formatTime(task.participatedAt) }}</text>
+
             </view>
           </view>
 
           <!-- 状态按钮 -->
           <view class="task-actions" @tap.stop="">
-            <view class="task-status-badge" :class="getStatusClass(task.participantStatus)" @tap="handleTaskAction(task)">
-              <text class="status-text">{{ getStatusText(task.participantStatus) }}</text>
+            <view>
+              <text class="task-desc">{{ task.statusDescription }}</text>
+              <text class="task-time">{{ formatTime(task.participatedAt) }}</text>
             </view>
-            <view v-if="task.participantStatus === 'ACCEPTED'" class="action-button go-complete" @tap="goToComplete(task)">
+            <view v-if="task.participantStatus === 'ACCEPTED'" class="action-button go-complete"
+              @tap="goToComplete(task)">
               <text class="action-text">去完成</text>
             </view>
-            <view v-if="task.participantStatus === 'PENDING' || task.participantStatus === 'APPROVED' || task.participantStatus === 'REJECTED'" class="action-button view-detail"
-              @tap="viewDetails(task)">
+            <view
+              v-if="task.participantStatus === 'PENDING' || task.participantStatus === 'APPROVED' || task.participantStatus === 'REJECTED'"
+              class="action-button view-detail" @tap="viewDetails(task)">
               <text class="action-text">查看详情</text>
             </view>
           </view>
@@ -88,38 +103,38 @@ export default {
   methods: {
     async loadTaskRecords(isRefresh = false) {
       if (this.loading) return
-      
+
       try {
         this.loading = true
-        
+
         if (isRefresh) {
           this.page = 1
           this.taskList = []
           this.hasMore = true
         }
-        
+
         const params = {
           page: this.page,
           size: this.size
         }
-        
+
         // 添加状态筛选参数
         const currentTabKey = this.tabs[this.currentTab].key
         if (currentTabKey) {
           params.participantStatus = currentTabKey
         }
-        
+
         const response = await get('/user/tasks/participated', params)
-        
+
         if (response.code === 200 && response.data) {
           const { records, total, current, pages } = response.data
-          
+
           if (isRefresh) {
             this.taskList = records || []
           } else {
             this.taskList = [...this.taskList, ...(records || [])]
           }
-          
+
           this.total = total || 0
           this.page = current || 1
           this.hasMore = this.page < pages
@@ -134,68 +149,68 @@ export default {
         this.loading = false
       }
     },
-    
+
     refreshData() {
       this.loadTaskRecords(true)
     },
-    
+
     loadMore() {
       if (this.hasMore && !this.loading) {
         this.page += 1
         this.loadTaskRecords()
       }
     },
-    
+
     switchTab(index) {
       this.currentTab = index
       this.refreshData()
     },
-    
+
     formatTime(timeStr) {
       if (!timeStr) return ''
       return timeStr.replace(/:\d{2}$/, '') // 移除秒数，只显示到分钟
     },
-    
+
     goHall() {
       uni.switchTab({ url: "/pages/task-hall/task-hall" })
     },
-    
+
     goToTaskDetail(task) {
       uni.navigateTo({
         url: `/pages/task-detail/task-detail?id=${task.taskId}`
       })
     },
-    
+
     handleTaskAction(task) {
       this.goToTaskDetail(task)
     },
-    
+
     getStatusClass(status) {
       const statusMap = {
         'ACCEPTED': 'status-pending',
-        'PENDING': 'status-reviewing', 
+        'PENDING': 'status-reviewing',
         'APPROVED': 'status-completed',
         'REJECTED': 'status-rejected'
       }
       return statusMap[status] || 'status-default'
     },
-    
+
     getStatusText(status) {
       const textMap = {
         'ACCEPTED': '待完成',
         'PENDING': '审核中',
-        'APPROVED': '已通过', 
+        'APPROVED': '已通过',
         'REJECTED': '未通过'
       }
       return textMap[status] || '未知'
     },
-    
+
     goToComplete(task) {
       uni.navigateTo({
         url: `/pages/submit-task/submit-task?id=${task.taskId}`
       })
     },
-    
+
     viewDetails(task) {
       uni.navigateTo({
         url: `/pages/task-detail/task-detail?id=${task.taskId}`
@@ -208,11 +223,11 @@ export default {
 <style scoped>
 .container {
   min-height: 100vh;
-  background: #f8f8f8;
+  background: linear-gradient(180deg, #FFDD00 12%, #FFFFFF 55%);
 }
 
 .nav-bar {
-  background: linear-gradient(135deg, #FFD700 0%, #FFA500 100%);
+  background: transparent;
 }
 
 .status-bar {
@@ -310,7 +325,7 @@ export default {
 }
 
 .tab-text {
-  font-size: 28rpx;
+  font-size: 35rpx;
   color: rgba(51, 51, 51, 0.7);
   font-weight: 500;
   transition: all 0.3s ease;
@@ -318,21 +333,22 @@ export default {
 }
 
 .tab-item.active .tab-text {
-  color: #333;
+  color: #B73714;
   font-weight: 600;
   transform: scale(1.05);
 }
 
 .tab-indicator {
   position: absolute;
-  bottom: 0;
+  bottom: 30rpx;
   left: 50%;
   transform: translateX(-50%);
-  width: 40rpx;
-  height: 6rpx;
-  background: #333;
+  width: 80rpx;
+  height: 10rpx;
+  /* background: #333; */
   border-radius: 3rpx;
   animation: slideIn 0.3s ease;
+  background: rgba(183, 55, 20, 0.3);
 }
 
 @keyframes slideIn {
@@ -357,6 +373,8 @@ export default {
   background: white;
   border-radius: 20rpx;
   padding: 24rpx;
+  margin-left: 20rpx;
+  margin-right: 20rpx;
   margin-bottom: 20rpx;
   box-shadow: 0 2rpx 10rpx rgba(0, 0, 0, 0.08);
   transition: all 0.3s ease;
@@ -370,7 +388,8 @@ export default {
 
 .task-main {
   display: flex;
-  align-items: flex-start;
+  align-items: center;
+  justify-content: space-around;
   margin-bottom: 16rpx;
 }
 
@@ -393,13 +412,13 @@ export default {
 }
 
 .task-name {
-  font-size: 30rpx;
+  font-size: 35rpx;
   font-weight: 600;
   color: #333;
 }
 
 .task-amount {
-  font-size: 30rpx;
+  font-size: 35rpx;
   font-weight: bold;
   color: #FF3030;
 }
@@ -419,17 +438,18 @@ export default {
 
 .task-actions {
   display: flex;
-  justify-content: flex-end;
+  justify-content: space-between;
   gap: 16rpx;
   margin-top: 16rpx;
   align-items: center;
 }
 
 .task-status-badge {
-  padding: 4rpx 12rpx;
+  padding: 4rpx 22rpx;
   border-radius: 20rpx;
-  font-size: 20rpx;
+  font-size: 28rpx;
   font-weight: bold;
+  color: white;
 }
 
 .status-badge.completed {
@@ -471,9 +491,9 @@ export default {
   background: #FFD700;
 }
 
-.status-reviewing .status-text {
+/* .status-reviewing .status-text {
   color: #333;
-}
+} */
 
 .status-completed {
   background: #34C759;

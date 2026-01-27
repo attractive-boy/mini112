@@ -1,0 +1,80 @@
+
+.container[data-v-df882951] {
+  background: #f5f5f5;
+  min-height: 100vh;
+}
+.content[data-v-df882951] {
+  padding: 0.625rem 0.9375rem;
+}
+.policy-header[data-v-df882951] {
+  text-align: center;
+  margin-bottom: 1.25rem;
+  padding: 0.9375rem 0;
+  background: #fff;
+  border-radius: 0.5rem;
+}
+.title[data-v-df882951] {
+  display: block;
+  font-size: 1.125rem;
+  font-weight: bold;
+  color: var(--text-main);
+  margin-bottom: 0.5rem;
+}
+.date[data-v-df882951] {
+  font-size: 0.75rem;
+  color: var(--text-sub);
+}
+.policy-content[data-v-df882951] {
+  background: #fff;
+  border-radius: 0.5rem;
+  padding: 0.9375rem;
+}
+.section[data-v-df882951] {
+  margin-bottom: 1.25rem;
+}
+.section[data-v-df882951]:last-child {
+  margin-bottom: 0;
+}
+.section-title[data-v-df882951] {
+  display: block;
+  font-size: 0.875rem;
+  font-weight: bold;
+  color: var(--text-main);
+  margin-bottom: 0.5rem;
+}
+.section-text[data-v-df882951] {
+  display: block;
+  font-size: 0.8125rem;
+  color: var(--text-main);
+  line-height: 1.6;
+  margin-bottom: 0.375rem;
+}
+.section-text[data-v-df882951]:last-child {
+  margin-bottom: 0;
+}
+.section-divider[data-v-df882951] {
+  height: 0.0625rem;
+  background-color: #e5e5e5;
+  margin: 0.9375rem 0;
+}
+.highlight-badge[data-v-df882951] {
+  background-color: #FFD700;
+  color: #333;
+  padding: 0.125rem 0.375rem;
+  border-radius: 0.625rem;
+  font-size: 0.625rem;
+  font-weight: bold;
+}
+.important-badge[data-v-df882951] {
+  background-color: #FF6B35;
+  color: white;
+  padding: 0.125rem 0.375rem;
+  border-radius: 0.625rem;
+  font-size: 0.625rem;
+  font-weight: bold;
+}
+.divider-line[data-v-df882951] {
+  height: 0.03125rem;
+  background-color: #ddd;
+  margin: 0.625rem 0;
+}

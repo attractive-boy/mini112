@@ -37,7 +37,8 @@
     },
     {
       "style": {
-        "navigationBarTitleText": "提交任务"
+        "navigationBarTitleText": "提交任务",
+        "navigationStyle": "custom"
       },
       "path": "pages/submit-task/submit-task"
     },
@@ -50,9 +51,10 @@
     },
     {
       "path": "pages/profile/profile",
-	  "style": {
-	    "navigationBarTitleText": "我的"
-	  }
+      "style": {
+        "navigationBarTitleText": "我的",
+        "navigationStyle": "custom"
+      }
     },
     {
       "path": "pages/wallet/wallet",
@@ -62,7 +64,8 @@
     },
     {
       "style": {
-        "navigationBarTitleText": "任务记录"
+        "navigationBarTitleText": "任务记录",
+        "navigationStyle": "custom"
       },
       "path": "pages/task-records/task-records"
     },
@@ -96,7 +99,8 @@
     },
     {
       "style": {
-        "navigationBarTitleText": "会员中心"
+        "navigationBarTitleText": "会员中心",
+        "navigationStyle": "custom"
       },
       "path": "pages/cooperation/cooperation"
     },
@@ -108,7 +112,8 @@
     },
     {
       "style": {
-        "navigationBarTitleText": "编辑信息"
+        "navigationBarTitleText": "编辑信息",
+        "navigationStyle": "custom"
       },
       "path": "pages/edit-profile/edit-profile"
     },
@@ -132,19 +137,22 @@
     },
     {
       "style": {
-        "navigationBarTitleText": "常见问题解答"
+        "navigationBarTitleText": "常见问题解答",
+        "navigationStyle": "custom"
       },
       "path": "pages/faq/faq"
     },
     {
       "style": {
-        "navigationBarTitleText": "关于我们"
+        "navigationBarTitleText": "关于我们",
+        "navigationStyle": "custom"
       },
       "path": "pages/about/about"
     },
     {
       "style": {
-        "navigationBarTitleText": "提交任务"
+        "navigationBarTitleText": "提交任务",
+        "navigationStyle": "custom"
       },
       "path": "pages/submit-success/submit-success"
     },

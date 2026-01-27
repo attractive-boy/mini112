@@ -1,6 +1,7 @@
 ﻿<template>
   <view class="profile-page">
     <!-- 固定头部区域 -->
+    <!-- <view class="safe-area-top"></view> -->
     <view class="header-section">
       <view class="user-info" @click="editProfile">
         <image class="avatar" :src="getAvatarUrl(userInfo.avatar)" />
@@ -31,7 +32,7 @@
       <view class="menu-section">
         <view class="menu-item" v-for="item in menus" :key="item.title" @click="navigate(item)">
           <view class="menu-icon-wrapper">
-            <text class="menu-icon">{{ item.icon }}</text>
+            <view class="menu-icon" :style="{ backgroundImage: `url(${ item.icon })` }"></view>
           </view>
           <text class="menu-title">{{ item.title }}</text>
           <text class="menu-arrow">›</text>
@@ -52,7 +53,7 @@
 <script>
 
 import { get } from '@/utils/request.js'
-
+import { staticUrl } from '../../utils/static.js'
 export default {
   components: {},
   data() {
@@ -80,13 +81,13 @@ export default {
         statisticsTime: ''
       },
       menus: [
-        { title: '钱包管理', icon: '💸', url: '/pages/wallet/wallet' },
-        { title: '任务记录', icon: '📋', url: '/pages/task-records/task-records' },
-        { title: '绑定账号管理', icon: '🔗', url: '/pages/account-binding/account-binding' },
-        { title: '邀请好友', icon: '👥', url: '/pages/invitation/invitation' },
-        { title: '直邀列表', icon: '📊', url: '/pages/direct-list/direct-list' },
-        { title: '常见问题解答', icon: '❓', url: '/pages/faq/faq' },
-        { title: '关于我们', icon: 'ℹ️', url: '/pages/about/about' }
+        { title: '钱包管理', icon: staticUrl('/static/容器@1x.png'), url: '/pages/wallet/wallet' },
+        { title: '任务记录', icon: staticUrl('/static/容器@1x1.png'), url: '/pages/task-records/task-records' },
+        { title: '绑定账号管理', icon: staticUrl('/static/容器@1x2.png'), url: '/pages/account-binding/account-binding' },
+        { title: '邀请好友', icon: staticUrl('/static/容器@1x3.png'), url: '/pages/invitation/invitation' }, 
+        { title: '直邀列表', icon: staticUrl('/static/容器@1x4.png'), url: '/pages/direct-list/direct-list' },
+        { title: '常见问题解答', icon: staticUrl('/static/容器@1x5.png'), url: '/pages/faq/faq' },
+        { title: '关于我们', icon: staticUrl('/static/容器@1x6.png'), url: '/pages/about/about' } 
       ]
     }
   },
@@ -186,12 +187,20 @@ export default {
 /* 页面容器 - 移除高度限制，让内容自然堆叠 */
 .profile-page {
   min-height: 100vh;
-  background: #f8f8f8;
+  background: #fff;
+
 }
+
+
 
 /* 固定头部区域 */
 .header-section {
-  background: linear-gradient(135deg, #FFD700 0%, #FFA500 100%);
+  padding-top: 100rpx;
+  background: #FFDD00;
+  border-radius: 0  0 80rpx 80rpx;
+  padding-bottom: 180rpx;
+  padding-left: 20rpx;
+  padding-right: 20rpx;
 }
 
 .user-info {
@@ -201,8 +210,8 @@ export default {
 }
 
 .avatar {
-  width: 120rpx;
-  height: 120rpx;
+  width: 150rpx;
+  height: 150rpx;
   border-radius: 50%;
   margin-right: 30rpx;
 }
@@ -232,7 +241,10 @@ export default {
 
 /* 内容容器 - 让系统自动处理滚动 */
 .content-container {
+  margin-left: 20rpx;
+  margin-right: 20rpx;
   padding: 0 20rpx;
+  transform: translateY(-180rpx);
 }
 
 /* 余额卡片 */
@@ -267,8 +279,8 @@ export default {
 }
 
 .divider {
-  width: 2rpx;
-  height: 60rpx;
+  width: 8rpx;
+  height: 80rpx;
   background: #e5e5e5;
 }
 
@@ -302,7 +314,12 @@ export default {
 }
 
 .menu-icon {
-  font-size: 32rpx;
+  width: 48rpx;
+  height: 48rpx;
+  /* border-radius: 50%; */
+  background-size: cover;
+  background-position: center;
+
 }
 
 .menu-title {
@@ -324,13 +341,13 @@ export default {
 }
 
 .logout-btn {
-  width: 200rpx;
-  height: 60rpx;
-  background-color: #FF5722;
-  color: white;
+  width: calc(100% - 140rpx);
+  height: 100rpx;
+  background-color: #FFDD00;
+  color: #3D3D3D;
   border: none;
   border-radius: 30rpx;
-  font-size: 24rpx;
+  font-size: 34rpx;
   font-weight: bold;
   display: flex;
   align-items: center;

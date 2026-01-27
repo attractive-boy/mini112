@@ -100,22 +100,23 @@ export default {
 <style scoped>
 .container {
   min-height: 100vh;
-  background: #f5f5f7;
+  background: #fff;
   display: flex;
   flex-direction: column;
 }
 
 .content {
   flex: 1;
-  padding: 20rpx;
+  padding: 40rpx;
 }
 
 .stats-card {
-  background: linear-gradient(135deg, #FFD700, #FFA500);
+  background: #FFD13A;
   border-radius: 20rpx;
   padding: 40rpx;
   margin-bottom: 30rpx;
   box-shadow: 0 4rpx 20rpx rgba(255, 215, 0, 0.3);
+  height: 200rpx;
 }
 
 .stats-header {
@@ -126,7 +127,7 @@ export default {
 
 .stats-title,
 .stats-amount {
-  font-size: 28rpx;
+  font-size: 38rpx;
   color: #333;
   font-weight: 500;
 }
@@ -138,13 +139,13 @@ export default {
 }
 
 .people-count {
-  font-size: 48rpx;
+  font-size: 58rpx;
   font-weight: bold;
   color: #FF6B35;
 }
 
 .amount-earned {
-  font-size: 48rpx;
+  font-size: 58rpx;
   font-weight: bold;
   color: #FF6B35;
 }

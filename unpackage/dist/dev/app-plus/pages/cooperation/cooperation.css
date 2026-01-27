@@ -1,0 +1,64 @@
+
+.container[data-v-8d7c12ff] {
+  height: 100vh;
+  background: #FFFCE7;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.dev-icon[data-v-8d7c12ff] {
+  margin-bottom: 1.25rem;
+}
+.gear[data-v-8d7c12ff] {
+  font-size: 3.75rem;
+  animation: rotate-8d7c12ff 2s linear infinite;
+}
+@keyframes rotate-8d7c12ff {
+from {
+    transform: rotate(0deg);
+}
+to {
+    transform: rotate(360deg);
+}
+}
+.dev-title[data-v-8d7c12ff] {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #333;
+  display: block;
+  margin-bottom: 0.625rem;
+}
+.content[data-v-8d7c12ff] {
+  width: 100%;
+}
+.dev-subtitle[data-v-8d7c12ff] {
+  text-align: center;
+  font-family: PingFang SC;
+  font-size: 36px;
+  font-weight: normal;
+  line-height: normal;
+  letter-spacing: 0em;
+
+  font-variation-settings: "opsz" auto;
+  color: #3D3D3D;
+}
+.dev-icon[data-v-8d7c12ff] {
+  width: 100%;
+  height: 325px;
+}
+.contact-btn[data-v-8d7c12ff] {
+  width: 6.25rem;
+  height: 1.875rem;
+  background-color: #FFD700;
+  color: #333;
+  border: none;
+  border-radius: 0.9375rem;
+  font-size: 0.75rem;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.contact-btn[data-v-8d7c12ff]:hover {
+  background-color: #FFC107;
+}
